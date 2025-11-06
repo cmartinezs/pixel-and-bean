@@ -1,0 +1,15 @@
+/nbproject
+/private
+.idea
+*.iml
+out/
+build/
+*.class
+*.log
+*.tmp
+.DS_Store
+.vscode/
+target/
+*.jar
+*.war
+*.ear
