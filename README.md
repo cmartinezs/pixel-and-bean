@@ -308,7 +308,7 @@ El proyecto evolucionará progresivamente a través de 6 clases:
 
 ### Estructura de Paquetes (Objetivo Final)
 ```
-cl.cmartinezs.pixelandbean/
+cl.tuusuario.pnb/
 ├── app/              # Inicio y contexto de aplicación
 ├── gui/              # Vistas Swing (JFrame, JDialog, JPanel)
 ├── controller/       # Controladores (lógica de eventos)

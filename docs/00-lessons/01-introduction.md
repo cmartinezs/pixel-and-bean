@@ -66,7 +66,7 @@ Comprender la estructura de un proyecto **Java Swing**, crear la base del proyec
 | Etapa | Descripción                           | Resultado esperado                          |
 |-------|---------------------------------------|---------------------------------------------|
 | 1️⃣   | Crear el proyecto base                | Proyecto `PixelAndBean` con clase principal |
-| 2️⃣   | Crear paquetes y organización inicial | Estructura ordenada de `cl.tuusuario.gui`  |
+| 2️⃣   | Crear paquetes y organización inicial | Estructura ordenada de `cl.tuusuario.pnb.gui`  |
 | 3️⃣   | Diseñar GUI del Login (Swing)         | Formulario de inicio de sesión              |
 | 4️⃣   | Crear la Ventana Maestra              | JFrame principal con menú                   |
 | 5️⃣   | Configurar flujo Login → Principal    | Navegación entre ventanas                   |
@@ -93,7 +93,7 @@ Comprender la estructura de un proyecto **Java Swing**, crear la base del proyec
 3. Completa los datos:
    - **Project Name:** `PixelAndBean`
    - **Project Location:** tu carpeta de trabajo o `C:\Users\TuUsuario\Documents\ProyectosPOO`
-   - **Main Class:** `cl.tuusuario.PixelAndBean`
+   - **Main Class:** `cl.tuusuario.pnb.PixelAndBean`
 4. Haz clic en **Finish**.
 
 > 💡 NetBeans genera automáticamente la estructura inicial y una clase `pixelandbean.java` con el método `main()`.
@@ -105,7 +105,7 @@ Comprender la estructura de un proyecto **Java Swing**, crear la base del proyec
 1. En el panel **Projects**, expande `Source Packages`.
 2. Crea un nuevo paquete:
    - Clic derecho sobre *Source Packages* → **New → Java Package**
-   - **Package Name:** `cl.tuusuario.gui`
+   - **Package Name:** `cl.tuusuario.pnb.gui`
 3. El resultado debe verse así:
 ```plaintext
 Source Packages/
@@ -119,9 +119,9 @@ Source Packages/
 
 ## 🪟 Paso 3 – Crear la interfaz de Login
 
-1. Clic derecho sobre `cl.tuusuario.gui` → **New → JFrame Form**.  
+1. Clic derecho sobre `cl.tuusuario.pnb.gui` → **New → JFrame Form**.  
    - **Class Name:** `LoginFrame`
-   - **Package:** `cl.tuusuario.gui`
+   - **Package:** `cl.tuusuario.pnb.gui`
 2. NetBeans abrirá el **editor visual (Design)**.
 3. Desde el panel **Palette**, arrastra los siguientes componentes:
    - `JLabel` (x2) → “Usuario:” / “Contraseña:”
@@ -155,7 +155,7 @@ Source Packages/
 
 1. Clic derecho → **New → JFrame Form**  
    - **Class Name:** `MainFrame`
-   - **Package:** `cl.tuusuario.gui`
+   - **Package:** `cl.tuusuario.pnb.gui`
 2. En el editor:
    - Añade un **JMenuBar** (desde la paleta).
    - Crea los menús (estructura completa del proyecto):
@@ -284,7 +284,7 @@ Al finalizar esta sesión tendrás:
 
 **Resumen de lo logrado:**
 - Comprendiste cómo crear un proyecto en NetBeans paso a paso.
-- Aprendiste a estructurar los paquetes de forma ordenada (`cl.tuusuario.gui`).
+- Aprendiste a estructurar los paquetes de forma ordenada (`cl.tuusuario.pnb.gui`).
 - Diseñaste interfaces gráficas usando el editor visual de NetBeans.
 - Implementaste eventos básicos de botones y validaciones simples.
 - Consolidaste la lógica de inicio de sesión y carga de la ventana principal.
@@ -512,7 +512,7 @@ try {
 
 ### 🔷 7. Organización de Paquetes (Naming Conventions)
 
-**¿Por qué usar `cl.tuusuario.gui`?**  
+**¿Por qué usar `cl.tuusuario.pnb.gui`?**  
 Java utiliza la convención de **nombre de dominio invertido** para evitar conflictos de nombres entre librerías:
 
 ```
@@ -543,15 +543,15 @@ cl.tuusuario/
 
 ### 🔷 8. NetBeans vs IntelliJ IDEA – ¿Por qué ambos?
 
-| Aspecto             | NetBeans                                  | IntelliJ IDEA                          |
-|---------------------|-------------------------------------------|----------------------------------------|
-| **Editor visual**   | ✅ Excelente (Matisse GUI Builder)       | ⚠️ Básico (requiere plugins externos)  |
-| **Generación de UI**| ✅ GroupLayout automático                | ❌ Limitado                            |
-| **Ant/Maven**       | ✅ Soporte nativo                        | ✅ Soporte nativo + Gradle             |
-| **Refactoring**     | ✅ Bueno                                 | ✅✅ Excelente                         |
-| **Autocompletado**  | ✅ Bueno                                 | ✅✅ Superior (IntelliSense avanzado)  |
-| **Depuración**      | ✅ Completa                              | ✅✅ Más herramientas                  |
-| **Plugins**         | ✅ Aceptable                             | ✅✅ Ecosistema más grande             |
+| Aspecto              | NetBeans                          | IntelliJ IDEA                         |
+|----------------------|-----------------------------------|---------------------------------------|
+| **Editor visual**    | ✅ Excelente (Matisse GUI Builder) | ⚠️ Básico (requiere plugins externos) |
+| **Generación de UI** | ✅ GroupLayout automático          | ❌ Limitado                            |
+| **Ant/Maven**        | ✅ Soporte nativo                  | ✅ Soporte nativo + Gradle             |
+| **Refactoring**      | ✅ Bueno                           | ✅✅ Excelente                          |
+| **Autocompletado**   | ✅ Bueno                           | ✅✅ Superior (IntelliSense avanzado)   |
+| **Depuración**       | ✅ Completa                        | ✅✅ Más herramientas                   |
+| **Plugins**          | ✅ Aceptable                       | ✅✅ Ecosistema más grande              |
 
 **Estrategia híbrida recomendada:**
 1. **NetBeans:** Para diseñar interfaces gráficas rápidamente con el editor visual.
@@ -578,7 +578,7 @@ cl.tuusuario/
     <target name="jar" depends="compile">
         <jar destfile="dist/PixelAndBean.jar" basedir="build/classes">
             <manifest>
-                <attribute name="Main-Class" value="cl.tuusuario.PixelAndBean"/>
+                <attribute name="Main-Class" value="cl.tuusuario.pnb.PixelAndBean"/>
             </manifest>
         </jar>
     </target>
