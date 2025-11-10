@@ -587,17 +587,25 @@ Estas funcionalidades complementan el proyecto base y son alcanzables:
 
 ## 📖 Recursos de Apoyo
 
+### Documentación del Proyecto
+- **[Guía Básica de Git](docs/extras/git-basico.md)** - Comandos esenciales de Git para el curso
+- [Clase 1 - Introducción a GUI](docs/00-lessons/01-gui-components/00-intro.md)
+- [Clase 2 - Componentes y Eventos](docs/00-lessons/02-components-events/00-intro.md)
+- [Progreso del Proyecto](docs/PROGRESS.md)
+
 ### Documentación Oficial
 - [Java SE 17 Documentation](https://docs.oracle.com/en/java/javase/17/)
 - [Swing Tutorial](https://docs.oracle.com/javase/tutorial/uiswing/)
 - [MySQL Documentation](https://dev.mysql.com/doc/)
 - [JDBC Tutorial](https://docs.oracle.com/javase/tutorial/jdbc/)
+- [Git Documentation](https://git-scm.com/doc)
 
 ### Tutoriales Recomendados
 - NetBeans GUI Builder (Matisse)
 - Patrón MVC en Java Swing
 - JDBC Best Practices
 - PreparedStatement vs Statement
+- [Learn Git Branching](https://learngitbranching.js.org/) - Tutorial interactivo de Git
 
 ---
 
