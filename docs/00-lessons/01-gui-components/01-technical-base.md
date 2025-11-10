@@ -16,11 +16,6 @@ Comprender el contexto del proyecto completo, los conceptos técnicos fundamenta
     * [**Lo que completaremos en clase (Core):**](#lo-que-completaremos-en-clase-core)
     * [**Lo que queda como trabajo autónomo:**](#lo-que-queda-como-trabajo-autónomo)
   * [🗺️ Mapa del Curso – 6 Clases](#-mapa-del-curso--6-clases)
-  * [🛠️ Instalación de Herramientas](#-instalación-de-herramientas)
-    * [📦 1. Instalación de Java 17 (o superior)](#-1-instalación-de-java-17-o-superior)
-    * [🔧 2. Instalación de NetBeans IDE 26](#-2-instalación-de-netbeans-ide-26)
-    * [💡 3. Instalación de IntelliJ IDEA Community Edition (Opcional)](#-3-instalación-de-intellij-idea-community-edition-opcional)
-  * [🧪 Verificación de la Instalación](#-verificación-de-la-instalación)
   * [🧰 Requisitos previos](#-requisitos-previos)
   * [📚 Apartado Técnico – Conceptos en Profundidad](#-apartado-técnico--conceptos-en-profundidad)
     * [🔷 1. Java Swing – Framework de GUI](#-1-java-swing--framework-de-gui)
@@ -76,272 +71,37 @@ Este es el primer paso de un proyecto de **6 clases** donde construiremos un sis
 
 ---
 
-## 🛠️ Instalación de Herramientas
-
-Antes de comenzar, necesitas instalar y configurar las herramientas necesarias para el curso.
-
-### 📦 1. Instalación de Java 17 (o superior)
-
-Java Development Kit (JDK) es fundamental para desarrollar aplicaciones Java.
-
-#### **Windows:**
-
-1. **Descargar el JDK:**
-   - Visita [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) o [OpenJDK](https://adoptium.net/)
-   - Selecciona **Java 17 (LTS)** o superior
-   - Descarga el instalador **Windows x64 Installer (.exe)**
-
-2. **Ejecutar el instalador:**
-   - Ejecuta el archivo descargado (ej: `jdk-17_windows-x64_bin.exe`)
-   - Acepta los términos y condiciones
-   - Deja la ruta de instalación por defecto: `C:\Program Files\Java\jdk-17`
-   - Clic en **Next** → **Install**
-
-3. **Configurar variables de entorno:**
-   - Abre el **Panel de Control** → **Sistema y Seguridad** → **Sistema**
-   - Clic en **Configuración avanzada del sistema**
-   - Clic en **Variables de entorno**
-   
-   **Crear JAVA_HOME:**
-   - En "Variables del sistema", clic en **Nueva**
-   - Nombre: `JAVA_HOME`
-   - Valor: `C:\Program Files\Java\jdk-17` (ajusta si instalaste en otra ruta)
-   - Clic en **Aceptar**
-   
-   **Agregar al PATH:**
-   - Busca la variable `Path` en "Variables del sistema"
-   - Selecciónala y clic en **Editar**
-   - Clic en **Nuevo**
-   - Agrega: `%JAVA_HOME%\bin`
-   - Clic en **Aceptar** en todas las ventanas
-
-4. **Verificar la instalación:**
-   - Abre una nueva ventana de **CMD** o **PowerShell**
-   - Ejecuta:
-   ```bash
-   java -version
-   ```
-   Deberías ver algo como:
-   ```
-   java version "17.0.x"
-   Java(TM) SE Runtime Environment
-   ```
-   
-   - Verifica el compilador:
-   ```bash
-   javac -version
-   ```
-   Deberías ver:
-   ```
-   javac 17.0.x
-   ```
-
-#### **macOS:**
-
-1. **Opción 1: Homebrew (recomendado)**
-   ```bash
-   # Instalar Homebrew si no lo tienes
-   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-   
-   # Instalar OpenJDK 17
-   brew install openjdk@17
-   
-   # Crear enlace simbólico
-   sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
-   ```
-
-2. **Opción 2: Instalador manual**
-   - Descarga el instalador **.dmg** desde [Adoptium](https://adoptium.net/)
-   - Abre el archivo y sigue las instrucciones
-
-3. **Verificar instalación:**
-   ```bash
-   java -version
-   javac -version
-   ```
-
-#### **Linux (Ubuntu/Debian):**
-
-```bash
-# Actualizar paquetes
-sudo apt update
-
-# Instalar OpenJDK 17
-sudo apt install openjdk-17-jdk -y
-
-# Verificar instalación
-java -version
-javac -version
-
-# Configurar JAVA_HOME (agregar al final de ~/.bashrc o ~/.zshrc)
-echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
-echo 'export PATH=$PATH:$JAVA_HOME/bin' >> ~/.bashrc
-source ~/.bashrc
-```
-
----
-
-### 🔧 2. Instalación de NetBeans IDE 26
-
-NetBeans es el IDE principal que usaremos para diseñar interfaces gráficas gracias a su excelente editor visual (Matisse GUI Builder).
-
-#### **Todos los sistemas operativos:**
-
-1. **Descargar NetBeans:**
-   - Visita [netbeans.apache.org](https://netbeans.apache.org/download/index.html)
-   - Descarga **Apache NetBeans 26** (o la última versión disponible)
-   - Selecciona la versión que incluye **Java SE** o **All**
-
-2. **Instalación:**
-
-   **Windows:**
-   - Ejecuta el instalador `.exe`
-   - Acepta los términos
-   - Selecciona la instalación **completa** (incluye todos los plugins)
-   - NetBeans detectará automáticamente tu instalación de Java
-   - Ubicación recomendada: `C:\Program Files\NetBeans-26`
-   - Clic en **Install**
-
-   **macOS:**
-   - Abre el archivo `.dmg`
-   - Arrastra NetBeans a la carpeta **Aplicaciones**
-   - Al ejecutar por primera vez, confirma que deseas abrirla
-
-   **Linux:**
-   ```bash
-   # Descargar y ejecutar el instalador
-   wget https://dlcdn.apache.org/netbeans/netbeans-installers/26/Apache-NetBeans-26-bin-linux-x64.sh
-   chmod +x Apache-NetBeans-26-bin-linux-x64.sh
-   sudo ./Apache-NetBeans-26-bin-linux-x64.sh
-   ```
-
-3. **Configuración inicial:**
-   - Al abrir NetBeans por primera vez, verifica que reconozca tu JDK
-   - Ve a **Tools → Java Platforms**
-   - Deberías ver tu JDK 17 listado
-   - Si no aparece, haz clic en **Add Platform** y selecciona la carpeta de instalación
-
-4. **Instalar plugins recomendados (opcional):**
-   - **Tools → Plugins**
-   - Busca e instala:
-     - **GitHub** (para integración con Git)
-     - **Markdown Support** (para leer documentación)
-
----
-
-### 💡 3. Instalación de IntelliJ IDEA Community Edition (Opcional)
-
-IntelliJ IDEA es excelente para escribir lógica de negocio, refactorización y depuración avanzada. La versión Community es gratuita y suficiente para este curso.
-
-#### **Todos los sistemas operativos:**
-
-1. **Descargar IntelliJ IDEA:**
-   - Visita [jetbrains.com/idea/download](https://www.jetbrains.com/idea/download/)
-   - Descarga **IntelliJ IDEA Community Edition** (gratuita)
-   - **NO** descargues la versión Ultimate (es de pago)
-
-2. **Instalación:**
-
-   **Windows:**
-   - Ejecuta el instalador `.exe`
-   - Acepta los términos
-   - Opciones recomendadas:
-     - ✅ Create Desktop Shortcut
-     - ✅ Update PATH variable
-     - ✅ Add "Open Folder as Project"
-     - ✅ .java, .groovy, .kt, .kts extensions
-   - Clic en **Install**
-
-   **macOS:**
-   - Abre el archivo `.dmg`
-   - Arrastra IntelliJ IDEA a **Aplicaciones**
-   - Al abrir por primera vez, permite la ejecución
-
-   **Linux (Ubuntu/Debian):**
-   
-   **Opción 1: Snap (más fácil)**
-   ```bash
-   sudo snap install intellij-idea-community --classic
-   ```
-   
-   **Opción 2: Descarga manual**
-   ```bash
-   # Descargar
-   wget https://download.jetbrains.com/idea/ideaIC-2024.3.tar.gz
-   
-   # Extraer
-   sudo tar -xzf ideaIC-2024.3.tar.gz -C /opt/
-   
-   # Crear enlace
-   sudo ln -s /opt/idea-IC-*/bin/idea.sh /usr/local/bin/idea
-   
-   # Ejecutar
-   idea
-   ```
-
-3. **Configuración inicial:**
-   - Al abrir por primera vez, selecciona tu tema preferido (Light o Darcula)
-   - Configura el JDK:
-     - **File → Project Structure → SDKs**
-     - Clic en **+** → **Add JDK**
-     - Selecciona la carpeta de tu JDK 17
-   - Importa configuraciones (si tienes) o salta este paso
-
-4. **Plugins recomendados:**
-   - **File → Settings → Plugins** (Windows/Linux) o **IntelliJ IDEA → Preferences → Plugins** (macOS)
-   - Busca e instala:
-     - **Git** (generalmente viene pre-instalado)
-     - **Markdown** (para documentación)
-     - **Database Navigator** (útil para Clase 4)
-
----
-
-## 🧪 Verificación de la Instalación
-
-Una vez instaladas todas las herramientas, verifica que todo funcione correctamente:
-
-### Checklist:
-
-1. **Java:**
-   ```bash
-   java -version    # Debe mostrar 17.x.x o superior
-   javac -version   # Debe mostrar 17.x.x o superior
-   ```
-
-2. **NetBeans:**
-   - Abre NetBeans
-   - **File → New Project → Java with Ant → Java Application**
-   - Si el asistente se abre sin errores, NetBeans está correctamente configurado
-
-3. **IntelliJ IDEA (opcional):**
-   - Abre IntelliJ
-   - **File → New → Project**
-   - Selecciona **Java** en el panel izquierdo
-   - Verifica que aparezca tu JDK 17 en el selector
-   - Si aparece, está correctamente configurado
-
-4. **Git:**
-   ```bash
-   git --version    # Debe mostrar la versión instalada
-   ```
-
-### ⚠️ Problemas Comunes:
-
-**"java no se reconoce como comando"**
-- Solución: Verifica que JAVA_HOME esté configurado correctamente y que `%JAVA_HOME%\bin` esté en el PATH
-- Reinicia el terminal después de configurar las variables
-
-**NetBeans no encuentra el JDK**
-- Solución: En NetBeans, ve a **Tools → Java Platforms → Add Platform** y selecciona manualmente tu carpeta JDK
-
-**IntelliJ muestra "SDK is not defined"**
-- Solución: **File → Project Structure → Project → Project SDK** → Selecciona tu JDK 17
-
----
-
 ## 🧰 Requisitos previos
 
-Ahora que has instalado todas las herramientas, asegúrate de tener:
+Antes de comenzar la parte práctica, asegúrate de tener las herramientas instaladas y configuradas:
+
+### Herramientas necesarias:
+
+- ✅ **Java 17+** instalado y configurado en el PATH
+- ✅ **NetBeans IDE 26** (para diseño visual de interfaces)
+- ✅ **IntelliJ IDEA Community Edition** (opcional, para lógica de negocio)
+- ✅ **Git/GitHub** configurado para control de versiones
+
+### Conocimientos básicos:
+  - Clases y objetos en Java
+  - Métodos y constructores
+  - Paquetes y organización de código
+  - Conceptos básicos de orientación a objetos
+
+### 🔧 Guías de Instalación
+
+Si aún no has instalado las herramientas, consulta estas guías detalladas:
+
+| Herramienta | Guía de Instalación | Obligatoria |
+|-------------|---------------------|-------------|
+| **Java 17+** | **[02-instalacion-java.md](../../01-extras/02-instalacion-java.md)** | ✅ Sí |
+| **NetBeans IDE 26** | **[03-instalacion-netbeans.md](../../01-extras/03-instalacion-netbeans.md)** | ✅ Sí |
+| **IntelliJ IDEA CE** | **[04-instalacion-intellij.md](../../01-extras/04-instalacion-intellij.md)** | ⚪ Opcional |
+| **Git** | **[01-git-basico.md](../../01-extras/01-git-basico.md)** | ✅ Sí |
+
+> 💡 **Recomendación:** Instala todas las herramientas **antes** de la primera clase para aprovechar al máximo el tiempo. Las guías incluyen instrucciones paso a paso para Windows, macOS y Linux.
+
+> 🎯 **Nota sobre IntelliJ:** Aunque es opcional, IntelliJ IDEA será muy útil desde la Clase 3 en adelante para refactorización y trabajo con bases de datos.
 
 - ✅ **Java 17** instalado y configurado en el PATH
 - ✅ **NetBeans IDE 26** (para diseño visual de interfaces)

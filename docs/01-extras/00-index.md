@@ -6,9 +6,29 @@ Esta carpeta contiene recursos complementarios para el curso de Programación Or
 
 ## 📋 Índice de Recursos
 
+### 🛠️ Instalación de Herramientas
+
+1. **[02-instalacion-java.md](02-instalacion-java.md)** - Instalación de Java 17+
+   - Windows, macOS y Linux
+   - Configuración de variables de entorno
+   - Verificación de instalación
+   - Problemas comunes
+
+2. **[03-instalacion-netbeans.md](03-instalacion-netbeans.md)** - Instalación de NetBeans IDE 26
+   - Instalación en todos los sistemas operativos
+   - Configuración inicial del JDK
+   - Plugins recomendados
+   - Editor visual de GUI
+
+3. **[04-instalacion-intellij.md](04-instalacion-intellij.md)** - Instalación de IntelliJ IDEA Community
+   - Instalación multiplataforma
+   - Configuración de SDK
+   - Plugins útiles para el curso
+   - Atajos de teclado esenciales
+
 ### 🔧 Herramientas y Tecnologías
 
-1. **[01-git-basico.md](01-git-basico.md)** - Guía básica de Git
+4. **[01-git-basico.md](01-git-basico.md)** - Guía básica de Git
    - Comandos esenciales para el curso
    - Flujo de trabajo recomendado
    - Solución a problemas comunes
@@ -16,12 +36,12 @@ Esta carpeta contiene recursos complementarios para el curso de Programación Or
 
 ---
 
-## 🎯 Cómo usar estos recursos
-
-Estos documentos están diseñados para ser consultados cuando los necesites:
-
-**Durante el curso:**
-- Consulta estas guías cuando encuentres una herramienta o concepto nuevo
+- **05-netbeans-tips.md** - Atajos y trucos de NetBeans
+- **06-jdbc-cheatsheet.md** - Referencia rápida de JDBC
+- **07-mysql-basico.md** - Comandos básicos de MySQL
+- **08-patrones-diseno.md** - Resumen de patrones de diseño usados
+- **09-java-streams.md** - Guía de Streams y expresiones lambda
+- **10-debugging-tips.md** - Técnicas de depuración en Java
 - Úsalas como referencia rápida durante las prácticas
 - Revisa las mejores prácticas antes de cada clase
 
