@@ -588,9 +588,10 @@ Estas funcionalidades complementan el proyecto base y son alcanzables:
 ## 📖 Recursos de Apoyo
 
 ### Documentación del Proyecto
-- **[Guía Básica de Git](docs/01-extras/01-git-basico.md)** - Comandos esenciales de Git para el curso
 - [Clase 1 - Introducción a GUI](docs/00-lessons/01-gui-components/00-intro.md)
 - [Clase 2 - Componentes y Eventos](docs/00-lessons/02-components-events/00-intro.md)
+- [Recursos Adicionales (Extras)](docs/01-extras/00-index.md)
+  - **[Guía Básica de Git](docs/01-extras/01-git-basico.md)** - Comandos esenciales de Git para el curso
 - [Progreso del Proyecto](docs/PROGRESS.md)
 
 ### Documentación Oficial
