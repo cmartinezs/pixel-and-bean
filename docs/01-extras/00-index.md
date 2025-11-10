@@ -36,12 +36,12 @@ Esta carpeta contiene recursos complementarios para el curso de Programación Or
 
 ---
 
-- **05-netbeans-tips.md** - Atajos y trucos de NetBeans
-- **06-jdbc-cheatsheet.md** - Referencia rápida de JDBC
-- **07-mysql-basico.md** - Comandos básicos de MySQL
-- **08-patrones-diseno.md** - Resumen de patrones de diseño usados
-- **09-java-streams.md** - Guía de Streams y expresiones lambda
-- **10-debugging-tips.md** - Técnicas de depuración en Java
+## 🎯 Cómo usar estos recursos
+
+Estos documentos están diseñados para ser consultados cuando los necesites:
+
+**Durante el curso:**
+- Consulta estas guías cuando encuentres una herramienta o concepto nuevo
 - Úsalas como referencia rápida durante las prácticas
 - Revisa las mejores prácticas antes de cada clase
 
@@ -56,12 +56,12 @@ Esta carpeta contiene recursos complementarios para el curso de Programación Or
 
 Los siguientes recursos se agregarán según las necesidades del curso:
 
-- **02-netbeans-tips.md** - Atajos y trucos de NetBeans
-- **03-jdbc-cheatsheet.md** - Referencia rápida de JDBC
-- **04-mysql-basico.md** - Comandos básicos de MySQL
-- **05-patrones-diseno.md** - Resumen de patrones de diseño usados
-- **06-java-streams.md** - Guía de Streams y expresiones lambda
-- **07-debugging-tips.md** - Técnicas de depuración en Java
+- **05-netbeans-tips.md** - Atajos y trucos de NetBeans
+- **06-jdbc-cheatsheet.md** - Referencia rápida de JDBC
+- **07-mysql-basico.md** - Comandos básicos de MySQL
+- **08-patrones-diseno.md** - Resumen de patrones de diseño usados
+- **09-java-streams.md** - Guía de Streams y expresiones lambda
+- **10-debugging-tips.md** - Técnicas de depuración en Java
 
 ---
 
