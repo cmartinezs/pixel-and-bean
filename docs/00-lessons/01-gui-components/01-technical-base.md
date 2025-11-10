@@ -85,7 +85,7 @@ Antes de comenzar la parte práctica, asegúrate de tener:
   - Paquetes y organización de código
   - Conceptos básicos de orientación a objetos
 
-> 💡 **Recomendación:** Si no tienes experiencia previa con Git, consulta nuestra **[Guía Básica de Git](../../extras/git-basico.md)** que cubre todos los comandos esenciales que necesitarás para el curso.
+> 💡 **Recomendación:** Si no tienes experiencia previa con Git, consulta nuestra **[Guía Básica de Git](../../01-extras/01-git-basico.md)** que cubre todos los comandos esenciales que necesitarás para el curso.
 
 ---
 
