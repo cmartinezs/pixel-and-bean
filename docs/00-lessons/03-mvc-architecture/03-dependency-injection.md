@@ -56,11 +56,11 @@ El `ApplicationContext` es nuestro **contenedor de Inversión de Control manual*
 ### Crear ApplicationContext.java
 
 ```java
-package cl.cmartinezs.pnb.app;
+package cl.tuusuario.pnb.app;
 
-import cl.cmartinezs.pnb.controller.*;
-import cl.cmartinezs.pnb.repository.*;
-import cl.cmartinezs.pnb.service.*;
+import cl.tuusuario.pnb.controller.*;
+import cl.tuusuario.pnb.repository.*;
+import cl.tuusuario.pnb.service.*;
 
 /**
  * Contenedor de Inversión de Control (IoC) manual
@@ -213,15 +213,14 @@ public class ApplicationContext {
 
 ```
 ApplicationContext.getInstance()
-    │
-    ├─> inicializarRepositorios()
-    │   ├─> usuarioRepository = new UsuarioRepositoryMock()
-    │   ├─> productoRepository = new ProductoRepositoryMock()
-    │   └─> ventaRepository = new VentaRepositoryMock()
-    │
-    ├─> inicializarServicios()
-    │   ├─> usuarioService = new UsuarioService(usuarioRepository) ← DI
-
+│
+├─> inicializarRepositorios()
+│   ├─> usuarioRepository = new UsuarioRepositoryMock()
+│   ├─> productoRepository = new ProductoRepositoryMock()
+│   └─> ventaRepository = new VentaRepositoryMock()
+│
+├─> inicializarServicios()
+│   ├─> usuarioService = new UsuarioService(usuarioRepository) ← DI
 │   ├─> productoService = new ProductoService(productoRepository) ← DI
 │   └─> ventaService = new VentaService(ventaRepository) ← DI
 │
@@ -233,30 +232,30 @@ ApplicationContext.getInstance()
 ```
 **Ventajas de este enfoque:**
 - ✅ **Centralizado:** Todas las dependencias en un solo lugar
-- ✅ **Fácil de cambiar:** Cambiar de Mock a JDBC solo requiere modificar \`inicializarRepositorios()\`
+- ✅ **Fácil de cambiar:** Cambiar de Mock a JDBC solo requiere modificar `inicializarRepositorios()`
 - ✅ **Singleton:** Una única instancia compartida en toda la aplicación
-- ✅ **Testeable:** Podemos hacer \`reset()\` para testing
+- ✅ **Testeable:** Podemos hacer `reset()` para testing
 ---
 ## 🔐 Paso 2 – Refactorizar LoginForm
-Ahora vamos a conectar el \`LoginForm\` con el \`LoginController\`.
+Ahora vamos a conectar el `LoginForm` con el `LoginController`.
 ### Nota importante:
 En esta sección solo proporcionaremos los **cambios clave** que se deben realizar. No necesitas reescribir todo el archivo, solo agrega o modifica las partes indicadas.
 ### Cambios en LoginForm.java:
 **1. Agregar campo del controller (al inicio de la clase):**
-\`\`\`java
+```java
 private LoginController controller;
-\`\`\`
+```
 **2. En el constructor, inicializar el controller:**
-\`\`\`java
+```java
 public LoginForm() {
     // Obtener controller del contexto
     this.controller = ApplicationContext.getInstance().getLoginController();
     initComponents(); // Ya existente
     setLocationRelativeTo(null); // Ya existente
 }
-\`\`\`
+```
 **3. Modificar el método btnLoginActionPerformed:**
-\`\`\`java
+```java
 private void btnLoginActionPerformed(ActionEvent evt) {
     String username = txtUsername.getText().trim();
     String password = new String(txtPassword.getPassword());
@@ -283,14 +282,14 @@ private void btnLoginActionPerformed(ActionEvent evt) {
         txtPassword.setText("");
     }
 }
-\`\`\`
+```
 ### Modificar MainFrame para recibir Usuario:
 **1. Agregar campo:**
-\`\`\`java
+```java
 private Usuario usuarioActual;
-\`\`\`
+```
 **2. Modificar constructor:**
-\`\`\`java
+```java
 public MainFrame(Usuario usuario) {
     this.usuarioActual = usuario;
     initComponents();
@@ -302,16 +301,16 @@ private void personalizarPorRol() {
     setTitle("Pixel & Bean - " + usuarioActual.getNombreCompleto() + 
              " (" + usuarioActual.getRol() + ")");
 }
-\`\`\`
+```
 ---
 ## 👥 Paso 3 – Refactorizar UsuariosPanel
 ### Cambios clave en UsuariosPanel.java:
 **1. Agregar campo del controller:**
-\`\`\`java
+```java
 private UsuarioController controller;
-\`\`\`
+```
 **2. En el constructor:**
-\`\`\`java
+```java
 public UsuariosPanel() {
     this.controller = ApplicationContext.getInstance().getUsuarioController();
     initComponents();
@@ -320,9 +319,9 @@ public UsuariosPanel() {
     cargarUsuarios(); // Modificado abajo
     limpiarFormulario(); // Ya existente
 }
-\`\`\`
+```
 **3. Modificar cargarUsuarios():**
-\`\`\`java
+```java
 private void cargarUsuarios() {
     try {
         List<Usuario> usuarios = controller.listarTodos();
@@ -334,9 +333,9 @@ private void cargarUsuarios() {
             JOptionPane.ERROR_MESSAGE);
     }
 }
-\`\`\`
+```
 **4. Modificar btnGuardarActionPerformed:**
-\`\`\`java
+```java
 private void btnGuardarActionPerformed(ActionEvent evt) {
     String username = txtUsername.getText().trim();
     String password = new String(txtPassword.getPassword()).trim();
@@ -372,9 +371,9 @@ private void btnGuardarActionPerformed(ActionEvent evt) {
             JOptionPane.ERROR_MESSAGE);
     }
 }
-\`\`\`
+```
 **5. Modificar btnEliminarActionPerformed:**
-\`\`\`java
+```java
 private void btnEliminarActionPerformed(ActionEvent evt) {
     if (usuarioSeleccionado == null) return;
     int respuesta = JOptionPane.showConfirmDialog(this,
@@ -398,9 +397,9 @@ private void btnEliminarActionPerformed(ActionEvent evt) {
         }
     }
 }
-\`\`\`
+```
 **6. Agregar búsqueda en setupListeners():**
-\`\`\`java
+```java
 private void setupListeners() {
     // ...código existente de selección...
     // Búsqueda en tiempo real
@@ -415,27 +414,27 @@ private void setupListeners() {
         }
     });
 }
-\`\`\`
+```
 ---
 ## 📦 Paso 4 – Refactorizar ProductosPanel
 ### Cambios similares a UsuariosPanel:
 **1. Agregar controller:**
-\`\`\`java
+```java
 private ProductoController controller;
 public ProductosPanel() {
     this.controller = ApplicationContext.getInstance().getProductoController();
     // ...resto igual
 }
-\`\`\`
+```
 **2. Cargar productos:**
-\`\`\`java
+```java
 private void cargarProductos() {
     List<Producto> productos = controller.listarTodos();
     tableModel.setProductos(productos);
 }
-\`\`\`
+```
 **3. Guardar:**
-\`\`\`java
+```java
 private void btnGuardarActionPerformed(ActionEvent evt) {
     try {
         String nombre = txtNombre.getText();
@@ -456,7 +455,7 @@ private void btnGuardarActionPerformed(ActionEvent evt) {
             JOptionPane.ERROR_MESSAGE);
     }
 }
-\`\`\`
+```
 > 💡 **Patrón repetitivo:** Todas las vistas siguen el mismo patrón. Los estudiantes deben aplicar el mismo concepto en VentasPanel y ReportesPanel.
 ---
 ## 🧪 Paso 5 – Pruebas y Validación
@@ -464,7 +463,7 @@ private void btnGuardarActionPerformed(ActionEvent evt) {
 1. **Compilar el proyecto** (eliminar errores si los hay)
 2. **Ejecutar la aplicación**
 3. **Probar login:**
-   - Usuario: \`admin\` / Password: \`admin123\`
+   - Usuario: `admin` / Password: `admin123`
    - Debe entrar correctamente
 4. **Probar gestión de usuarios:**
    - Crear nuevo usuario
@@ -483,16 +482,16 @@ private void btnGuardarActionPerformed(ActionEvent evt) {
 ---
 ## 🧹 Paso 6 – Limpieza y Versionamiento
 ### Limpieza:
-\`\`\`bash
+```bash
 # Eliminar imports no usados
 # En NetBeans: Clic derecho → Fix Imports
 # En IntelliJ: Ctrl+Alt+O
 # Formatear código
 # En NetBeans: Alt+Shift+F
 # En IntelliJ: Ctrl+Alt+L
-\`\`\`
+```
 ### Git:
-\`\`\`bash
+```bash
 git add .
 git commit -m "feat: Implementar arquitectura MVC con IoC
 - Crear ApplicationContext (contenedor IoC)
@@ -501,11 +500,11 @@ git commit -m "feat: Implementar arquitectura MVC con IoC
 - Separar completamente UI de lógica de negocio
 Clase 3 completada"
 git push origin main
-\`\`\`
+```
 ---
 ## ✅ Resultado Final de la Clase 3
 ### Arquitectura completa:
-\`\`\`
+```
 ┌──────────────┐
 │     GUI      │  ← LoginForm, UsuariosPanel, ProductosPanel
 └──────┬───────┘
@@ -529,7 +528,7 @@ git push origin main
 ┌──────────────┐
 │     MOCK     │  ← UsuarioRepositoryMock (temporal)
 └──────────────┘
-\`\`\`
+```
 ### Logros:
 - ✅ Arquitectura en capas implementada
 - ✅ Separación de responsabilidades (SoC)
@@ -542,21 +541,21 @@ git push origin main
 ## 💡 Próxima Clase
 **Clase 4: Conexión a Base de Datos con JDBC**
 Lo mejor de nuestra arquitectura:
-\`\`\`java
+```java
 // Clase 3 (ahora):
 usuarioRepository = new UsuarioRepositoryMock();
 // Clase 4 (próxima):
 usuarioRepository = new UsuarioRepositoryJDBC(connection);
 // ¡Y TODO el resto del código sigue igual! 🎉
-\`\`\`
+```
 **Cambios necesarios en Clase 4:**
-- Crear \`UsuarioRepositoryJDBC\` que implemente \`IUsuarioRepository\`
-- Crear \`ProductoRepositoryJDBC\` que implemente \`IProductoRepository\`
-- Crear \`VentaRepositoryJDBC\` que implemente \`IVentaRepository\`
-- Modificar **solo** \`ApplicationContext.inicializarRepositorios()\`
+- Crear `UsuarioRepositoryJDBC` que implemente `IUsuarioRepository`
+- Crear `ProductoRepositoryJDBC` que implemente `IProductoRepository`
+- Crear `VentaRepositoryJDBC` que implemente `IVentaRepository`
+- Modificar **solo** `ApplicationContext.inicializarRepositorios()`
 - Services, Controllers y Vistas **NO cambian**
 ---
 > 🏗️ *"La buena arquitectura hace que los cambios futuros sean triviales."*
 >
 > 🎯 *"Si puedes cambiar la fuente de datos sin tocar 90% del código, lo hiciste bien."*
-**¡Clase 3 completada-20 /home/cmartinezs/Github/cmartinezs/PixelAndBean/docs/00-lessons/03-mvc-architecture/03-dependency-injection.md* 🎊
+**¡Clase 3 completada-20 /home/tuusuario/Github/tuusuario/PixelAndBean/docs/00-lessons/03-mvc-architecture/03-dependency-injection.md* 🎊

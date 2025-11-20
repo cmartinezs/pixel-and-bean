@@ -48,7 +48,7 @@ Vamos a crear una arquitectura en capas bien organizada.
 ### Estructura final:
 
 ```
-cl.cmartinezs.pnb/
+cl.tuusuario.pnb/
 ├── app/                    ← Nuevo: Configuración de aplicación
 ├── controller/             ← Nuevo: Controladores
 ├── service/                ← Nuevo: Lógica de negocio
@@ -61,13 +61,13 @@ cl.cmartinezs.pnb/
 
 ### En NetBeans/IntelliJ:
 
-1. Clic derecho sobre `cl.cmartinezs.pnb` → **New → Java Package**
+1. Clic derecho sobre `cl.tuusuario.pnb` → **New → Java Package**
 2. Crear los siguientes paquetes:
-   - `cl.cmartinezs.pnb.app`
-   - `cl.cmartinezs.pnb.controller`
-   - `cl.cmartinezs.pnb.service`
-   - `cl.cmartinezs.pnb.repository`
-   - `cl.cmartinezs.pnb.repository.mock`
+   - `cl.tuusuario.pnb.app`
+   - `cl.tuusuario.pnb.controller`
+   - `cl.tuusuario.pnb.service`
+   - `cl.tuusuario.pnb.repository`
+   - `cl.tuusuario.pnb.repository.mock`
 
 > 💡 **Nota:** El paquete `model` y `gui` ya existen de clases anteriores.
 
@@ -83,12 +83,12 @@ Las interfaces definen el **contrato** de operaciones de acceso a datos.
 
 ### Interface: IUsuarioRepository.java
 
-**Ubicación:** `cl.cmartinezs.pnb.repository`
+**Ubicación:** `cl.tuusuario.pnb.repository`
 
 ```java
-package cl.cmartinezs.pnb.repository;
+package cl.tuusuario.pnb.repository;
 
-import cl.cmartinezs.pnb.model.Usuario;
+import cl.tuusuario.pnb.model.Usuario;
 import java.util.List;
 
 /**
@@ -160,12 +160,12 @@ public interface IUsuarioRepository {
 
 ### Interface: IProductoRepository.java
 
-**Ubicación:** `cl.cmartinezs.pnb.repository`
+**Ubicación:** `cl.tuusuario.pnb.repository`
 
 ```java
-package cl.cmartinezs.pnb.repository;
+package cl.tuusuario.pnb.repository;
 
-import cl.cmartinezs.pnb.model.Producto;
+import cl.tuusuario.pnb.model.Producto;
 import java.util.List;
 
 /**
@@ -223,12 +223,12 @@ public interface IProductoRepository {
 
 ### Interface: IVentaRepository.java
 
-**Ubicación:** `cl.cmartinezs.pnb.repository`
+**Ubicación:** `cl.tuusuario.pnb.repository`
 
 ```java
-package cl.cmartinezs.pnb.repository;
+package cl.tuusuario.pnb.repository;
 
-import cl.cmartinezs.pnb.model.Venta;
+import cl.tuusuario.pnb.model.Venta;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -293,13 +293,13 @@ Ahora implementaremos las interfaces con datos en memoria (Mock).
 
 ### Clase: UsuarioRepositoryMock.java
 
-**Ubicación:** `cl.cmartinezs.pnb.repository.mock`
+**Ubicación:** `cl.tuusuario.pnb.repository.mock`
 
 ```java
-package cl.cmartinezs.pnb.repository.mock;
+package cl.tuusuario.pnb.repository.mock;
 
-import cl.cmartinezs.pnb.model.Usuario;
-import cl.cmartinezs.pnb.repository.IUsuarioRepository;
+import cl.tuusuario.pnb.model.Usuario;
+import cl.tuusuario.pnb.repository.IUsuarioRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -398,13 +398,13 @@ public class UsuarioRepositoryMock implements IUsuarioRepository {
 
 ### Clase: ProductoRepositoryMock.java
 
-**Ubicación:** `cl.cmartinezs.pnb.repository.mock`
+**Ubicación:** `cl.tuusuario.pnb.repository.mock`
 
 ```java
-package cl.cmartinezs.pnb.repository.mock;
+package cl.tuusuario.pnb.repository.mock;
 
-import cl.cmartinezs.pnb.model.Producto;
-import cl.cmartinezs.pnb.repository.IProductoRepository;
+import cl.tuusuario.pnb.model.Producto;
+import cl.tuusuario.pnb.repository.IProductoRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -513,13 +513,13 @@ public class ProductoRepositoryMock implements IProductoRepository {
 
 ### Clase: VentaRepositoryMock.java
 
-**Ubicación:** `cl.cmartinezs.pnb.repository.mock`
+**Ubicación:** `cl.tuusuario.pnb.repository.mock`
 
 ```java
-package cl.cmartinezs.pnb.repository.mock;
+package cl.tuusuario.pnb.repository.mock;
 
-import cl.cmartinezs.pnb.model.Venta;
-import cl.cmartinezs.pnb.repository.IVentaRepository;
+import cl.tuusuario.pnb.model.Venta;
+import cl.tuusuario.pnb.repository.IVentaRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -630,13 +630,13 @@ La capa de servicios contiene toda la **lógica de negocio** y validaciones.
 
 ### Clase: UsuarioService.java
 
-**Ubicación:** `cl.cmartinezs.pnb.service`
+**Ubicación:** `cl.tuusuario.pnb.service`
 
 ```java
-package cl.cmartinezs.pnb.service;
+package cl.tuusuario.pnb.service;
 
-import cl.cmartinezs.pnb.model.Usuario;
-import cl.cmartinezs.pnb.repository.IUsuarioRepository;
+import cl.tuusuario.pnb.model.Usuario;
+import cl.tuusuario.pnb.repository.IUsuarioRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -833,13 +833,13 @@ public class UsuarioService {
 
 ### Clase: ProductoService.java
 
-**Ubicación:** `cl.cmartinezs.pnb.service`
+**Ubicación:** `cl.tuusuario.pnb.service`
 
 ```java
-package cl.cmartinezs.pnb.service;
+package cl.tuusuario.pnb.service;
 
-import cl.cmartinezs.pnb.model.Producto;
-import cl.cmartinezs.pnb.repository.IProductoRepository;
+import cl.tuusuario.pnb.model.Producto;
+import cl.tuusuario.pnb.repository.IProductoRepository;
 import java.util.List;
 
 /**
@@ -978,13 +978,13 @@ public class ProductoService {
 
 ### Clase: VentaService.java
 
-**Ubicación:** `cl.cmartinezs.pnb.service`
+**Ubicación:** `cl.tuusuario.pnb.service`
 
 ```java
-package cl.cmartinezs.pnb.service;
+package cl.tuusuario.pnb.service;
 
-import cl.cmartinezs.pnb.model.Venta;
-import cl.cmartinezs.pnb.repository.IVentaRepository;
+import cl.tuusuario.pnb.model.Venta;
+import cl.tuusuario.pnb.repository.IVentaRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -1083,13 +1083,13 @@ Los controladores **coordinan** el flujo entre las vistas y los servicios.
 
 ### Clase: LoginController.java
 
-**Ubicación:** `cl.cmartinezs.pnb.controller`
+**Ubicación:** `cl.tuusuario.pnb.controller`
 
 ```java
-package cl.cmartinezs.pnb.controller;
+package cl.tuusuario.pnb.controller;
 
-import cl.cmartinezs.pnb.model.Usuario;
-import cl.cmartinezs.pnb.service.UsuarioService;
+import cl.tuusuario.pnb.model.Usuario;
+import cl.tuusuario.pnb.service.UsuarioService;
 
 /**
  * Controlador para operaciones de autenticación
@@ -1115,13 +1115,13 @@ public class LoginController {
 
 ### Clase: UsuarioController.java
 
-**Ubicación:** `cl.cmartinezs.pnb.controller`
+**Ubicación:** `cl.tuusuario.pnb.controller`
 
 ```java
-package cl.cmartinezs.pnb.controller;
+package cl.tuusuario.pnb.controller;
 
-import cl.cmartinezs.pnb.model.Usuario;
-import cl.cmartinezs.pnb.service.UsuarioService;
+import cl.tuusuario.pnb.model.Usuario;
+import cl.tuusuario.pnb.service.UsuarioService;
 import java.util.List;
 
 /**
@@ -1165,13 +1165,13 @@ public class UsuarioController {
 
 ### Clase: ProductoController.java
 
-**Ubicación:** `cl.cmartinezs.pnb.controller`
+**Ubicación:** `cl.tuusuario.pnb.controller`
 
 ```java
-package cl.cmartinezs.pnb.controller;
+package cl.tuusuario.pnb.controller;
 
-import cl.cmartinezs.pnb.model.Producto;
-import cl.cmartinezs.pnb.service.ProductoService;
+import cl.tuusuario.pnb.model.Producto;
+import cl.tuusuario.pnb.service.ProductoService;
 import java.util.List;
 
 /**
@@ -1222,13 +1222,13 @@ public class ProductoController {
 
 ### Clase: VentaController.java
 
-**Ubicación:** `cl.cmartinezs.pnb.controller`
+**Ubicación:** `cl.tuusuario.pnb.controller`
 
 ```java
-package cl.cmartinezs.pnb.controller;
+package cl.tuusuario.pnb.controller;
 
-import cl.cmartinezs.pnb.model.Venta;
-import cl.cmartinezs.pnb.service.VentaService;
+import cl.tuusuario.pnb.model.Venta;
+import cl.tuusuario.pnb.service.VentaService;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -1281,7 +1281,7 @@ Al finalizar esta sección has creado:
 
 ### Estructura completa de paquetes:
 ```
-cl.cmartinezs.pnb/
+cl.tuusuario.pnb/
 ├── app/                    ✅ Creado (vacío por ahora)
 ├── controller/             ✅ 4 controladores
 │   ├── LoginController.java
