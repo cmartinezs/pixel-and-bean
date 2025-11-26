@@ -97,9 +97,9 @@ Gracias al patrón Repository y la inyección de dependencias, las capas superio
 La interfaz `UsuarioRepository` debería ser algo como:
 
 ```java
-package cl.cmartinezs.pnb.repository;
+package cl.tuusuario.pnb.repository;
 
-import cl.cmartinezs.pnb.model.Usuario;
+import cl.tuusuario.pnb.model.Usuario;
 import java.util.List;
 import java.util.Optional;
 
@@ -162,14 +162,14 @@ public interface UsuarioRepository {
 
 ### 1.2 Implementar con JDBC
 
-Ubicación: `cl.cmartinezs.pnb.repository.impl.UsuarioRepositoryImpl`
+Ubicación: `cl.tuusuario.pnb.repository.impl.UsuarioRepositoryImpl`
 
 ```java
-package cl.cmartinezs.pnb.repository.impl;
+package cl.tuusuario.pnb.repository.impl;
 
-import cl.cmartinezs.pnb.model.Usuario;
-import cl.cmartinezs.pnb.repository.UsuarioRepository;
-import cl.cmartinezs.pnb.util.DatabaseConnectionFactory;
+import cl.tuusuario.pnb.model.Usuario;
+import cl.tuusuario.pnb.repository.UsuarioRepository;
+import cl.tuusuario.pnb.util.DatabaseConnectionFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -435,11 +435,11 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 Crear clase de prueba: `TestUsuarioRepository.java`
 
 ```java
-package cl.cmartinezs.pnb;
+package cl.tuusuario.pnb;
 
-import cl.cmartinezs.pnb.model.Usuario;
-import cl.cmartinezs.pnb.repository.UsuarioRepository;
-import cl.cmartinezs.pnb.repository.impl.UsuarioRepositoryImpl;
+import cl.tuusuario.pnb.model.Usuario;
+import cl.tuusuario.pnb.repository.UsuarioRepository;
+import cl.tuusuario.pnb.repository.impl.UsuarioRepositoryImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -516,9 +516,9 @@ public class TestUsuarioRepository {
 ### 2.1 Revisar la Interfaz
 
 ```java
-package cl.cmartinezs.pnb.repository;
+package cl.tuusuario.pnb.repository;
 
-import cl.cmartinezs.pnb.model.Producto;
+import cl.tuusuario.pnb.model.Producto;
 import java.util.List;
 import java.util.Optional;
 
@@ -539,14 +539,14 @@ public interface ProductoRepository {
 
 ### 2.2 Implementar con JDBC
 
-Ubicación: `cl.cmartinezs.pnb.repository.impl.ProductoRepositoryImpl`
+Ubicación: `cl.tuusuario.pnb.repository.impl.ProductoRepositoryImpl`
 
 ```java
-package cl.cmartinezs.pnb.repository.impl;
+package cl.tuusuario.pnb.repository.impl;
 
-import cl.cmartinezs.pnb.model.Producto;
-import cl.cmartinezs.pnb.repository.ProductoRepository;
-import cl.cmartinezs.pnb.util.DatabaseConnectionFactory;
+import cl.tuusuario.pnb.model.Producto;
+import cl.tuusuario.pnb.repository.ProductoRepository;
+import cl.tuusuario.pnb.util.DatabaseConnectionFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -809,11 +809,11 @@ public class ProductoRepositoryImpl implements ProductoRepository {
 ### 2.3 Probar ProductoRepository
 
 ```java
-package cl.cmartinezs.pnb;
+package cl.tuusuario.pnb;
 
-import cl.cmartinezs.pnb.model.Producto;
-import cl.cmartinezs.pnb.repository.ProductoRepository;
-import cl.cmartinezs.pnb.repository.impl.ProductoRepositoryImpl;
+import cl.tuusuario.pnb.model.Producto;
+import cl.tuusuario.pnb.repository.ProductoRepository;
+import cl.tuusuario.pnb.repository.impl.ProductoRepositoryImpl;
 
 import java.util.List;
 
@@ -874,9 +874,9 @@ Para esta clase, implementaremos solo las operaciones básicas de Venta. En la C
 ### 3.1 Definir Interfaz
 
 ```java
-package cl.cmartinezs.pnb.repository;
+package cl.tuusuario.pnb.repository;
 
-import cl.cmartinezs.pnb.model.Venta;
+import cl.tuusuario.pnb.model.Venta;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -913,11 +913,11 @@ public interface VentaRepository {
 ### 3.2 Implementar con JDBC
 
 ```java
-package cl.cmartinezs.pnb.repository.impl;
+package cl.tuusuario.pnb.repository.impl;
 
-import cl.cmartinezs.pnb.model.Venta;
-import cl.cmartinezs.pnb.repository.VentaRepository;
-import cl.cmartinezs.pnb.util.DatabaseConnectionFactory;
+import cl.tuusuario.pnb.model.Venta;
+import cl.tuusuario.pnb.repository.VentaRepository;
+import cl.tuusuario.pnb.util.DatabaseConnectionFactory;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -1054,11 +1054,11 @@ public class VentaRepositoryImpl implements VentaRepository {
 ### 3.3 Probar VentaRepository
 
 ```java
-package cl.cmartinezs.pnb;
+package cl.tuusuario.pnb;
 
-import cl.cmartinezs.pnb.model.Venta;
-import cl.cmartinezs.pnb.repository.VentaRepository;
-import cl.cmartinezs.pnb.repository.impl.VentaRepositoryImpl;
+import cl.tuusuario.pnb.model.Venta;
+import cl.tuusuario.pnb.repository.VentaRepository;
+import cl.tuusuario.pnb.repository.impl.VentaRepositoryImpl;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -1109,7 +1109,7 @@ Si tienes tiempo extra, puedes implementar hash de contraseñas para mayor segur
 ### Clase PasswordHasher
 
 ```java
-package cl.cmartinezs.pnb.util;
+package cl.tuusuario.pnb.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -20,18 +20,58 @@ Comprender los fundamentos de JDBC (Java Database Connectivity), la arquitectura
     * [La solución: JDBC + MySQL](#la-solución-jdbc--mysql)
   * [📚 Apartado Técnico – JDBC y Base de Datos](#-apartado-técnico--jdbc-y-base-de-datos)
     * [🔷 1. ¿Qué es JDBC?](#-1-qué-es-jdbc)
+      * [Características principales:](#características-principales)
+      * [¿Por qué usar JDBC?](#por-qué-usar-jdbc)
     * [🔷 2. Arquitectura de JDBC](#-2-arquitectura-de-jdbc)
+      * [Tipos de Drivers JDBC:](#tipos-de-drivers-jdbc)
     * [🔷 3. Driver JDBC de MySQL](#-3-driver-jdbc-de-mysql)
+      * [¿Qué es MySQL Connector/J?](#qué-es-mysql-connectorj)
+      * [Características:](#características)
+      * [Agregarlo al proyecto:](#agregarlo-al-proyecto)
+      * [Paso 1: Descargar el conector MySQL](#paso-1-descargar-el-conector-mysql)
+      * [Paso 2: Incluir el JAR en NetBeans](#paso-2-incluir-el-jar-en-netbeans)
+      * [Paso 3: Incluir el JAR en IntelliJ IDEA](#paso-3-incluir-el-jar-en-intellij-idea)
+      * [Paso 4: Probar la configuración](#paso-4-probar-la-configuración)
+      * [Problemas comunes y soluciones](#problemas-comunes-y-soluciones)
+      * [Alternativa: Instalar en repositorio local Maven](#alternativa-instalar-en-repositorio-local-maven)
+      * [Resumen de la Opción 1](#resumen-de-la-opción-1)
     * [🔷 4. Componentes Principales de JDBC](#-4-componentes-principales-de-jdbc)
+      * [4.1 Connection](#41-connection)
+      * [4.2 Statement](#42-statement)
+      * [4.3 PreparedStatement (✅ Recomendado)](#43-preparedstatement--recomendado)
+      * [4.4 ResultSet](#44-resultset)
     * [🔷 5. Statement vs PreparedStatement](#-5-statement-vs-preparedstatement)
+      * [Comparación:](#comparación)
+      * [Ejemplo de SQL Injection:](#ejemplo-de-sql-injection)
     * [🔷 6. ResultSet – Navegación de Resultados](#-6-resultset--navegación-de-resultados)
+      * [Métodos principales:](#métodos-principales)
+      * [Patrón típico:](#patrón-típico)
     * [🔷 7. Transacciones en JDBC](#-7-transacciones-en-jdbc)
+      * [Propiedades ACID:](#propiedades-acid)
+      * [Uso en JDBC:](#uso-en-jdbc)
     * [🔷 8. SQL Injection y Seguridad](#-8-sql-injection-y-seguridad)
+      * [¿Qué es SQL Injection?](#qué-es-sql-injection)
+      * [Ejemplo de ataque:](#ejemplo-de-ataque)
+      * [Prevención:](#prevención)
+      * [Reglas de oro:](#reglas-de-oro)
     * [🔷 9. Try-With-Resources (ARM)](#-9-try-with-resources-arm)
+      * [Antes de Java 7 (❌ Tedioso):](#antes-de-java-7--tedioso)
+      * [Con Try-With-Resources (✅ Limpio):](#con-try-with-resources--limpio)
     * [🔷 10. Connection Pool](#-10-connection-pool)
+      * [¿Qué es?](#qué-es)
+      * [Problema sin pool:](#problema-sin-pool)
+      * [Solución con pool:](#solución-con-pool)
+      * [Librería recomendada: HikariCP](#librería-recomendada-hikaricp)
     * [🔷 11. Patrón Factory para Conexiones](#-11-patrón-factory-para-conexiones)
+      * [Estructura:](#estructura)
+      * [Archivo `application.properties`:](#archivo-applicationproperties)
+      * [Uso:](#uso)
     * [🔷 12. Manejo de SQLException](#-12-manejo-de-sqlexception)
+      * [Estrategias de manejo:](#estrategias-de-manejo)
   * [🎯 Resumen Técnico](#-resumen-técnico)
+    * [Conceptos clave aprendidos:](#conceptos-clave-aprendidos)
+    * [Flujo típico de una consulta:](#flujo-típico-de-una-consulta)
+    * [Buenas prácticas:](#buenas-prácticas)
   * [💡 Siguiente Paso](#-siguiente-paso)
 <!-- TOC -->
 
@@ -67,7 +107,7 @@ Al finalizar esta clase serás capaz de:
 
 ### El problema actual
 
-Actualmente tenemos una excelente arquitectura, pero los datos se pierden al cerrar la aplicación:
+Actualmente, tenemos una excelente arquitectura, pero los datos se pierden al cerrar la aplicación:
 
 ```
 ┌──────────────────────────────────┐
@@ -145,12 +185,12 @@ Vamos a conectar nuestros repositorios a una base de datos real:
 
 #### Características principales:
 
-| Característica | Descripción |
-|----------------|-------------|
-| **Estándar** | API definida en `java.sql.*` y `javax.sql.*` |
+| Característica          | Descripción                                               |
+|-------------------------|-----------------------------------------------------------|
+| **Estándar**            | API definida en `java.sql.*` y `javax.sql.*`              |
 | **Independiente de BD** | Mismo código funciona con MySQL, PostgreSQL, Oracle, etc. |
-| **Driver-based** | Cada BD provee su propio driver JDBC |
-| **Thread-safe** | Diseñado para aplicaciones multi-hilo |
+| **Driver-based**        | Cada BD provee su propio driver JDBC                      |
+| **Thread-safe**         | Diseñado para aplicaciones multi-hilo                     |
 
 #### ¿Por qué usar JDBC?
 
@@ -172,7 +212,7 @@ JDBC tiene una arquitectura de 4 capas:
 
 ```
 ┌─────────────────────────────────────┐
-│   Aplicación Java (tu código)      │  ← Tu aplicación
+│   Aplicación Java (tu código)       │  ← Tu aplicación
 └────────────────┬────────────────────┘
                  │
                  ↓
@@ -198,12 +238,12 @@ JDBC tiene una arquitectura de 4 capas:
 
 #### Tipos de Drivers JDBC:
 
-| Tipo | Nombre | Descripción | Uso |
-|------|--------|-------------|-----|
-| **Tipo 1** | JDBC-ODBC Bridge | Usa ODBC nativo | ⚠️ Obsoleto |
-| **Tipo 2** | Native-API Driver | Usa bibliotecas nativas | ⚠️ Dependiente de plataforma |
-| **Tipo 3** | Network Protocol | Middleware en Java | 🟡 Raro |
-| **Tipo 4** | Thin Driver | 100% Java puro | ✅ **Recomendado** (MySQL Connector/J) |
+| Tipo       | Nombre            | Descripción             | Uso                                   |
+|------------|-------------------|-------------------------|---------------------------------------|
+| **Tipo 1** | JDBC-ODBC Bridge  | Usa ODBC nativo         | ⚠️ Obsoleto                           |
+| **Tipo 2** | Native-API Driver | Usa bibliotecas nativas | ⚠️ Dependiente de plataforma          |
+| **Tipo 3** | Network Protocol  | Middleware en Java      | 🟡 Raro                               |
+| **Tipo 4** | Thin Driver       | 100% Java puro          | ✅ **Recomendado** (MySQL Connector/J) |
 
 **Nosotros usaremos Tipo 4:** MySQL Connector/J es 100% Java, portable y eficiente.
 
@@ -339,7 +379,7 @@ public class TestMySQLConnection {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/testdb";
         String user = "root";
-        String password = "yourpassword";
+        String password = "your-password";
         
         try {
             // Intentar conexión
@@ -353,8 +393,8 @@ public class TestMySQLConnection {
         }
     }
 }
-
-
+```
+```markdown
 **Ejecuta la clase:**
 - NetBeans: Clic derecho → **Run File** (o `Shift+F6`).
 - IntelliJ: Clic derecho → **Run 'TestMySQLConnection.main()'** (o `Ctrl+Shift+F10`).
@@ -457,49 +497,271 @@ dependencies {
 
 #### Resumen de la Opción 1
 
-| Paso | Acción |
-|------|--------|
-| 1 | Descargar `mysql-connector-j-8.3.0.jar` desde MySQL oficial o Maven Central |
-| 2 | NetBeans: Properties → Libraries → Add JAR/Folder |
-| 3 | IntelliJ: Project Structure → Modules → Dependencies → + JAR |
-| 4 | Crear clase de prueba con `DriverManager.getConnection()` |
-| 5 | Ejecutar y verificar conexión exitosa |
+| Paso | Acción                                                                      |
+|------|-----------------------------------------------------------------------------|
+| 1    | Descargar `mysql-connector-j-8.3.0.jar` desde MySQL oficial o Maven Central |
+| 2    | NetBeans: Properties → Libraries → Add JAR/Folder                           |
+| 3    | IntelliJ: Project Structure → Modules → Dependencies → + JAR                |
+| 4    | Crear clase de prueba con `DriverManager.getConnection()`                   |
+| 5    | Ejecutar y verificar conexión exitosa                                       |
 
 **Ventajas:**
 - Control directo sobre la versión del JAR.
-- Funciona en proyectos sin sistema de build (Ant, proyectos simples).
-- Útil para testing rápido o entornos sin acceso a Maven Central.
+- Funciona perfectamente con proyectos Ant (como este proyecto).
+- Útil para testing rápido sin dependencias externas.
+- No requiere conexión a internet después de la descarga inicial.
 
 **Desventajas:**
 - Debes gestionar actualizaciones manualmente.
-- Difícil de compartir en equipo (cada desarrollador debe descargar el JAR).
-- No gestiona dependencias transitivas automáticamente.
+- Si compartes el proyecto, incluye el JAR en una carpeta `libs/` o documenta dónde descargarlo.
 
-**Recomendación:** Para proyectos profesionales o en equipo, prefiere la Opción 2 (Maven/Gradle) que automatiza la descarga y gestión de versiones.
+**Recomendación para este proyecto:** Usa JAR manual ya que el proyecto usa Apache Ant como sistema de build.
+
+---
+
+### 🔷 4. Componentes Principales de JDBC
+
+#### 4.1 Connection
+
+Representa una conexión activa a la base de datos.
+
+```java
+// Obtener conexión
+String url = "jdbc:mysql://localhost:3306/pixelandbean";
+String user = "root";
+String pass = "";
+
+Connection conn = DriverManager.getConnection(url, user, pass);
+
+// Propiedades importantes
+conn.setAutoCommit(false); // Modo transaccional
+conn.commit();             // Confirmar cambios
+conn.rollback();           // Revertir cambios
+conn.close();              // Liberar conexión
+```
+
+**⚠️ Importante:** Siempre cerrar conexiones para evitar fugas de recursos.
+
+#### 4.2 Statement
+
+Ejecuta sentencias SQL estáticas.
+
+```java
+Statement stmt = conn.createStatement();
+
+// Consultas (SELECT)
+ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+
+// Modificaciones (INSERT, UPDATE, DELETE)
+int rows = stmt.executeUpdate("DELETE FROM usuario WHERE id = 5");
+
+// Cerrar
+stmt.close();
+```
+
+**⚠️ Problema:** Vulnerable a SQL Injection. **No usar con datos de usuario.**
+
+#### 4.3 PreparedStatement (✅ Recomendado)
+
+Ejecuta sentencias SQL parametrizadas (con `?`).
+
+```java
+String sql = "SELECT * FROM usuario WHERE username = ? AND password = ?";
+PreparedStatement ps = conn.prepareStatement(sql);
+
+// Establecer parámetros (índice empieza en 1)
+ps.setString(1, "admin");
+ps.setString(2, "1234");
+
+// Ejecutar
+ResultSet rs = ps.executeQuery();
+
+// Cerrar
+ps.close();
+```
+
+**✅ Ventajas:**
+- Previene SQL Injection
+- Mejor rendimiento (consulta pre-compilada)
+- Más legible
+
+#### 4.4 ResultSet
+
+Representa el resultado de una consulta SELECT.
+
+```java
+ResultSet rs = ps.executeQuery();
+
+// Iterar sobre resultados
+while (rs.next()) {
+    int id = rs.getInt("id");
+    String username = rs.getString("username");
+    String rol = rs.getString("rol");
+    
+    Usuario usuario = new Usuario(id, username, rol);
+}
+
+rs.close();
+```
+
+---
+
+### 🔷 5. Statement vs PreparedStatement
+
+#### Comparación:
+
+| Aspecto           | Statement            | PreparedStatement       |
+|-------------------|----------------------|-------------------------|
+| **SQL Injection** | ❌ Vulnerable         | ✅ Protegido             |
+| **Performance**   | 🟡 Normal            | ✅ Mejor (pre-compilado) |
+| **Legibilidad**   | 🟡 Concatenación fea | ✅ Parámetros claros     |
+| **Uso**           | ⚠️ Solo SQL estático | ✅ Siempre               |
+
+#### Ejemplo de SQL Injection:
+
+```java
+// ❌ NUNCA HACER ESTO - Vulnerable
+String username = request.getParameter("user"); // Valor: admin' OR '1'='1
+String sql = "SELECT * FROM usuario WHERE username = '" + username + "'";
+// SQL resultante: SELECT * FROM usuario WHERE username = 'admin' OR '1'='1'
+// ¡Devuelve TODOS los usuarios!
+
+Statement stmt = conn.createStatement();
+ResultSet rs = stmt.executeQuery(sql); // ❌ HACKEABLE
+```
+
+```java
+// ✅ SIEMPRE HACER ESTO - Seguro
+String username = request.getParameter("user"); // Valor: admin' OR '1'='1
+String sql = "SELECT * FROM usuario WHERE username = ?";
+
+PreparedStatement ps = conn.prepareStatement(sql);
+ps.setString(1, username); // Escapado automáticamente
+// SQL real: SELECT * FROM usuario WHERE username = 'admin\' OR \'1\'=\'1'
+// Busca literalmente un usuario con ese nombre raro (no existe)
+
+ResultSet rs = ps.executeQuery(); // ✅ SEGURO
+```
+
+---
+
+### 🔷 6. ResultSet – Navegación de Resultados
+
+#### Métodos principales:
+
+```java
+ResultSet rs = ps.executeQuery();
+
+// Navegación
+rs.next();     // Avanzar al siguiente registro (retorna false si no hay más)
+rs.first();    // Ir al primero
+rs.last();     // Ir al último
+rs.previous(); // Retroceder
+
+// Obtener datos por columna
+rs.getInt("id");           // Por nombre
+rs.getString(2);           // Por índice (empieza en 1)
+rs.getDouble("precio");
+rs.getDate("fechaHora");
+rs.getBoolean("activo");
+
+// Verificar null
+if (rs.wasNull()) {
+    // Último valor leído era NULL
+}
+
+// Cerrar
+rs.close();
+```
+
+#### Patrón típico:
+
+```java
+List<Usuario> usuarios = new ArrayList<>();
+
+String sql = "SELECT id, username, rol, activo FROM usuario";
+try (PreparedStatement ps = conn.prepareStatement(sql);
+     ResultSet rs = ps.executeQuery()) {
+    
+    while (rs.next()) {
+        Usuario usuario = new Usuario();
+        usuario.setId(rs.getInt("id"));
+        usuario.setUsername(rs.getString("username"));
+        usuario.setRol(rs.getString("rol"));
+        usuario.setActivo(rs.getBoolean("activo"));
+        
+        usuarios.add(usuario);
+    }
+}
+
+return usuarios;
+```
+
+---
+
+### 🔷 7. Transacciones en JDBC
+
+Las transacciones garantizan que un conjunto de operaciones se ejecute completamente o no se ejecute en absoluto.
+
+#### Propiedades ACID:
+
+| Propiedad       | Descripción                  |
+|-----------------|------------------------------|
+| **Atomicity**   | Todo o nada                  |
+| **Consistency** | Estado válido siempre        |
+| **Isolation**   | Transacciones independientes |
+| **Durability**  | Cambios permanentes          |
+
+#### Uso en JDBC:
+
+```java
+Connection conn = factory.getConnection();
+
+try {
+    // Desactivar auto-commit
+    conn.setAutoCommit(false);
+    
+    // Operación 1: Insertar venta
+    String sql1 = "INSERT INTO venta (usuario_id, total) VALUES (?, ?)";
+    PreparedStatement ps1 = conn.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
+    ps1.setInt(1, 1);
+    ps1.setDouble(2, 5000.0);
+    ps1.executeUpdate();
+    
+    // Obtener ID generado
+    ResultSet rs = ps1.getGeneratedKeys();
+    rs.next();
+    int ventaId = rs.getInt(1);
+    
+    // Operación 2: Insertar detalles
+    String sql2 = "INSERT INTO venta_detalle (venta_id, producto_id, cantidad) VALUES (?, ?, ?)";
+    PreparedStatement ps2 = conn.prepareStatement(sql2);
+    ps2.setInt(1, ventaId);
+    ps2.setInt(2, 10);
+    ps2.setInt(3, 2);
     ps2.executeUpdate();
     
-
-Si tu proyecto usa Maven, agrega esta dependencia en tu archivo `pom.xml`:
-
+    // Todo OK, confirmar
+    conn.commit();
+    
 } catch (SQLException e) {
     // Algo salió mal, revertir
     conn.rollback();
     throw e;
-    <version>8.3.0</version>
+    
 } finally {
     // Restaurar auto-commit
     conn.setAutoCommit(true);
-Maven descargará automáticamente el JAR y sus dependencias.
-
+    conn.close();
+}
 ```
 
-Si usas Gradle, agrega esta línea en tu archivo `build.gradle`:
-
+**¿Cuándo usar transacciones?**
+- ✅ Insertar venta + detalles (operación multi-tabla)
 - ✅ Transferencias bancarias
-implementation 'com.mysql:mysql-connector-j:8.3.0'
+- ✅ Operaciones que deben ser atómicas
 
 ---
-Gradle descargará el conector y lo añadirá al classpath.
 ### 🔷 8. SQL Injection y Seguridad
 
 #### ¿Qué es SQL Injection?
@@ -605,12 +867,12 @@ try (Connection conn = factory.getConnection();
         // ...
     }
     
-// No hay forma estándar de conectar Java con bases de datos
+} catch (SQLException e) {
     e.printStackTrace();
-// ✅ Con JDBC - Simple y estándar
-Connection conn = DriverManager.getConnection(url, user, pass);
+}
+// ✅ Todos los recursos se cierran automáticamente, incluso si hay excepción
 ```
-ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
+
 **Ventajas:**
 - ✅ Código más limpio y legible
 - ✅ No olvidas cerrar recursos
@@ -660,12 +922,26 @@ conn.close(); // ✅ No cierra realmente, la devuelve al pool
 
 #### Librería recomendada: HikariCP
 
-```xml
-<dependency>
-    <groupId>com.zaxxer</groupId>
-    <artifactId>HikariCP</artifactId>
-    <version>5.0.1</version>
-</dependency>
+HikariCP es la librería de Connection Pool más rápida y eficiente para Java.
+
+**Características:**
+- Ultra-rápida y ligera
+- Configuración simple
+- Ampliamente usada en producción
+
+**Ejemplo de configuración:**
+
+```java
+HikariConfig config = new HikariConfig();
+config.setJdbcUrl("jdbc:mysql://localhost:3306/pixelandbean");
+config.setUsername("root");
+config.setPassword("");
+config.setMaximumPoolSize(10);
+
+HikariDataSource dataSource = new HikariDataSource(config);
+
+// Usar en lugar de DriverManager
+Connection conn = dataSource.getConnection();
 ```
 
 **Nota:** Para este proyecto (6 clases), usaremos conexiones simples con `DriverManager` por simplicidad. En producción, **siempre usar Connection Pool**.
@@ -679,7 +955,7 @@ Para centralizar la lógica de conexión, usamos el **patrón Factory**.
 #### Estructura:
 
 ```java
-package cl.cmartinezs.pnb.util;
+package cl.tuusuario.pnb.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -18,9 +18,17 @@ Instalar XAMPP, crear la base de datos del proyecto, definir el esquema de tabla
   * [📦 Paso 1: Instalación de XAMPP (5 min)](#-paso-1-instalación-de-xampp-5-min)
     * [¿Qué es XAMPP?](#qué-es-xampp)
     * [Descarga e Instalación](#descarga-e-instalación)
+      * [Windows:](#windows)
+      * [Linux:](#linux)
+      * [macOS:](#macos)
     * [Iniciar Servicios](#iniciar-servicios)
+      * [Windows:](#windows-1)
+      * [Linux:](#linux-1)
+      * [macOS:](#macos-1)
     * [Verificar Instalación](#verificar-instalación)
     * [Solución de Problemas Comunes](#solución-de-problemas-comunes)
+      * [Puerto 3306 en uso:](#puerto-3306-en-uso)
+      * [MySQL no inicia:](#mysql-no-inicia)
   * [🗃️ Paso 2: Creación de la Base de Datos (10 min)](#-paso-2-creación-de-la-base-de-datos-10-min)
     * [Acceder a phpMyAdmin](#acceder-a-phpmyadmin)
     * [Crear Base de Datos](#crear-base-de-datos)
@@ -35,6 +43,8 @@ Instalar XAMPP, crear la base de datos del proyecto, definir el esquema de tabla
   * [⚙️ Paso 4: Configuración de Java (15 min)](#-paso-4-configuración-de-java-15-min)
     * [4.1 Descargar MySQL Connector/J](#41-descargar-mysql-connectorj)
     * [4.2 Agregar al Proyecto](#42-agregar-al-proyecto)
+      * [NetBeans:](#netbeans)
+      * [IntelliJ IDEA:](#intellij-idea)
     * [4.3 Crear application.properties](#43-crear-applicationproperties)
     * [4.4 Crear DatabaseConnectionFactory](#44-crear-databaseconnectionfactory)
     * [4.5 Probar la Conexión](#45-probar-la-conexión)
@@ -53,13 +63,13 @@ Instalar XAMPP, crear la base de datos del proyecto, definir el esquema de tabla
 
 ## ⏱️ Distribución del Tiempo
 
-| Actividad | Duración |
-|-----------|----------|
-| Instalación XAMPP | 5 min |
-| Base de datos y esquema | 10 min |
-| Datos iniciales | 10 min |
-| Configuración Java | 15 min |
-| **Total** | **40 min** |
+| Actividad               | Duración   |
+|-------------------------|------------|
+| Instalación XAMPP       | 5 min      |
+| Base de datos y esquema | 10 min     |
+| Datos iniciales         | 10 min     |
+| Configuración Java      | 15 min     |
+| **Total**               | **40 min** |
 
 ---
 
@@ -610,11 +620,11 @@ app.author=Tu Nombre o Equipo
 
 ### 4.4 Crear DatabaseConnectionFactory
 
-Crear paquete: `cl.cmartinezs.pnb.util`  
+Crear paquete: `cl.tuusuario.pnb.util`  
 Crear clase: `DatabaseConnectionFactory.java`
 
 ```java
-package cl.cmartinezs.pnb.util;
+package cl.tuusuario.pnb.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -730,9 +740,9 @@ public class DatabaseConnectionFactory {
 Crear clase de prueba: `TestConnection.java` en paquete raíz o `util`
 
 ```java
-package cl.cmartinezs.pnb;
+package cl.tuusuario.pnb;
 
-import cl.cmartinezs.pnb.util.DatabaseConnectionFactory;
+import cl.tuusuario.pnb.util.DatabaseConnectionFactory;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -945,7 +955,7 @@ CREATE DATABASE pixelandbean CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 ```
 ┌─────────────────────────────────────────┐
-│   Aplicación Java (PixelAndBean)       │
+│   Aplicación Java (PixelAndBean)        │
 │  ┌───────────────────────────────────┐  │
 │  │  DatabaseConnectionFactory        │  │
 │  │  - Carga application.properties   │  │
