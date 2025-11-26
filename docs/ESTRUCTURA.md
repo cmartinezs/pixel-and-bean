@@ -1,7 +1,7 @@
 # 📁 Estructura Final de Documentación - Proyecto Pixel & Bean
 
-**Fecha:** 10 de noviembre de 2025  
-**Estado:** Reorganización completada con numeración correlativa
+**Fecha:** 25 de noviembre de 2025  
+**Estado:** 4 clases completadas (67%)
 
 ---
 
@@ -10,6 +10,7 @@
 ```
 PixelAndBean/
 ├── README.md                           # Documento principal del proyecto
+├── application.properties              # Configuración de base de datos
 ├── docs/
 │   ├── 00-lessons/                     # Clases del curso (numeradas)
 │   │   ├── 01-gui-components/          # Clase 1
@@ -17,16 +18,33 @@ PixelAndBean/
 │   │   │   ├── 01-technical-base.md    # Conceptos técnicos
 │   │   │   └── 02-main-windows.md      # Práctica
 │   │   │
-│   │   └── 02-components-events/       # Clase 2
+│   │   ├── 02-components-events/       # Clase 2
+│   │   │   ├── 00-intro.md             # Índice de la clase
+│   │   │   ├── 01-technical-concepts.md # Conceptos avanzados
+│   │   │   ├── 02-layouts-views.md     # Creación de vistas
+│   │   │   └── 03-navigation-stubs.md  # Navegación y stubs
+│   │   │
+│   │   ├── 03-mvc-architecture/        # Clase 3
+│   │   │   ├── 00-intro.md             # Índice de la clase
+│   │   │   ├── 01-technical-patterns.md # Patrones y MVC
+│   │   │   ├── 02-refactoring-layers.md # Refactorización a capas
+│   │   │   └── 03-dependency-injection.md # Inyección de dependencias
+│   │   │
+│   │   └── 04-database-jdbc/           # Clase 4
 │   │       ├── 00-intro.md             # Índice de la clase
-│   │       ├── 01-technical-concepts.md # Conceptos avanzados
-│   │       ├── 02-layouts-views.md     # Creación de vistas
-│   │       └── 03-navigation-stubs.md  # Navegación y stubs
+│   │       ├── 01-technical-jdbc.md    # Fundamentos de JDBC
+│   │       ├── 02-database-setup.md    # Instalación y configuración
+│   │       └── 03-repository-implementation.md # Implementación
 │   │
 │   ├── 01-extras/                      # Recursos adicionales
 │   │   ├── 00-index.md                 # Índice de recursos
 │   │   └── 01-git-basico.md            # Guía de Git
 │   │
+│   ├── sql/                            # Scripts de base de datos
+│   │   ├── 01_schema.sql               # Esquema de tablas
+│   │   └── 02_seed.sql                 # Datos iniciales
+│   │
+│   ├── ESTRUCTURA.md                   # Este archivo
 │   └── PROGRESS.md                     # Resumen de progreso
 │
 ├── src/                                # Código fuente (Java)
@@ -79,6 +97,14 @@ PixelAndBean/
 | `02-components-events/01-technical-concepts.md` | Conceptos Avanzados | 30 min | ✅ |
 | `02-components-events/02-layouts-views.md` | Creación de Vistas | 40 min | ✅ |
 | `02-components-events/03-navigation-stubs.md` | Navegación y Stubs | 30 min | ✅ |
+| `03-mvc-architecture/00-intro.md` | Índice Clase 3 | - | ✅ |
+| `03-mvc-architecture/01-technical-patterns.md` | Patrones y MVC | 30 min | ✅ |
+| `03-mvc-architecture/02-refactoring-layers.md` | Refactorización a Capas | 40 min | ✅ |
+| `03-mvc-architecture/03-dependency-injection.md` | Inyección de Dependencias | 30 min | ✅ |
+| `04-database-jdbc/00-intro.md` | Índice Clase 4 | - | ✅ |
+| `04-database-jdbc/01-technical-jdbc.md` | Fundamentos de JDBC | 30 min | ✅ |
+| `04-database-jdbc/02-database-setup.md` | Instalación y Setup BD | 40 min | ✅ |
+| `04-database-jdbc/03-repository-implementation.md` | Implementación Repositorios | 30 min | ✅ |
 
 ### Extras (01-extras/)
 | Archivo | Título | Tipo | Estado |
@@ -125,6 +151,8 @@ PixelAndBean/
 - **Empezar aquí:** [README.md](../README.md)
 - **Clase 1:** [01-gui-components/00-intro.md](00-lessons/01-gui-components/00-intro.md)
 - **Clase 2:** [02-components-events/00-intro.md](00-lessons/02-components-events/00-intro.md)
+- **Clase 3:** [03-mvc-architecture/00-intro.md](00-lessons/03-mvc-architecture/00-intro.md)
+- **Clase 4:** [04-database-jdbc/00-intro.md](00-lessons/04-database-jdbc/00-intro.md)
 - **Recursos extras:** [01-extras/00-index.md](01-extras/00-index.md)
 - **Progreso:** [PROGRESS.md](PROGRESS.md)
 
@@ -176,8 +204,8 @@ PixelAndBean/
 ## 🚀 Próximos Pasos
 
 ### Documentación Pendiente (Futuro)
-- [ ] Clase 3 - MVC + DI
-- [ ] Clase 4 - Conexión BD (JDBC)
+- [x] Clase 3 - MVC + DI ✅ Completada
+- [x] Clase 4 - Conexión BD (JDBC) ✅ Completada
 - [ ] Clase 5 - CRUD Completo
 - [ ] Clase 6 - Empaquetado
 
@@ -197,12 +225,9 @@ PixelAndBean/
 
 ## 📊 Estadísticas
 
-- **Clases completadas:** 2 de 6 (33%)
-- **Archivos de documentación:** 10
-- **Páginas totales (estimado):** ~150
-- **Tiempo de lectura total:** ~4 horas
-- **Ejemplos de código:** 50+
-- **Commits realizados:** 10+
+- **Clases completadas:** 4 de 6 (67%)
+- **Archivos de documentación:** 22
+- **Scripts SQL:** 2 (schema + seed)
 
 ---
 
@@ -210,6 +235,6 @@ PixelAndBean/
 
 ---
 
-**Última actualización:** 10 de noviembre de 2025  
+**Última actualización:** 25 de noviembre de 2025  
 **Mantenido por:** Carlos Martínez
 
