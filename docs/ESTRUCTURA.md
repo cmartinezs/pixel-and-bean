@@ -1,7 +1,7 @@
 # 📁 Estructura Final de Documentación - Proyecto Pixel & Bean
 
-**Fecha:** 25 de noviembre de 2025  
-**Estado:** 4 clases completadas (67%)
+**Fecha:** 27 de noviembre de 2025  
+**Estado:** 5 clases completadas (83%)
 
 ---
 
@@ -30,11 +30,17 @@ PixelAndBean/
 │   │   │   ├── 02-refactoring-layers.md # Refactorización a capas
 │   │   │   └── 03-dependency-injection.md # Inyección de dependencias
 │   │   │
-│   │   └── 04-database-jdbc/           # Clase 4
+│   │   ├── 04-database-jdbc/           # Clase 4
+│   │   │   ├── 00-intro.md             # Índice de la clase
+│   │   │   ├── 01-technical-jdbc.md    # Fundamentos de JDBC
+│   │   │   ├── 02-database-setup.md    # Instalación y configuración
+│   │   │   └── 03-repository-implementation.md # Implementación
+│   │   │
+│   │   └── 05-crud-operations/         # Clase 5
 │   │       ├── 00-intro.md             # Índice de la clase
-│   │       ├── 01-technical-jdbc.md    # Fundamentos de JDBC
-│   │       ├── 02-database-setup.md    # Instalación y configuración
-│   │       └── 03-repository-implementation.md # Implementación
+│   │       ├── 01-usuarios-crud.md     # CRUD de Usuarios
+│   │       ├── 02-productos-crud.md    # CRUD de Productos
+│   │       └── 03-ventas-modulo.md     # Módulo de Ventas
 │   │
 │   ├── 01-extras/                      # Recursos adicionales
 │   │   ├── 00-index.md                 # Índice de recursos
@@ -105,6 +111,10 @@ PixelAndBean/
 | `04-database-jdbc/01-technical-jdbc.md` | Fundamentos de JDBC | 30 min | ✅ |
 | `04-database-jdbc/02-database-setup.md` | Instalación y Setup BD | 40 min | ✅ |
 | `04-database-jdbc/03-repository-implementation.md` | Implementación Repositorios | 30 min | ✅ |
+| `05-crud-operations/00-intro.md` | Índice Clase 5 | - | ✅ |
+| `05-crud-operations/01-usuarios-crud.md` | CRUD de Usuarios | 30 min | ✅ |
+| `05-crud-operations/02-productos-crud.md` | CRUD de Productos | 30 min | ✅ |
+| `05-crud-operations/03-ventas-modulo.md` | Módulo de Ventas Básico | 40 min | ✅ |
 
 ### Extras (01-extras/)
 | Archivo | Título | Tipo | Estado |
@@ -153,6 +163,7 @@ PixelAndBean/
 - **Clase 2:** [02-components-events/00-intro.md](00-lessons/02-components-events/00-intro.md)
 - **Clase 3:** [03-mvc-architecture/00-intro.md](00-lessons/03-mvc-architecture/00-intro.md)
 - **Clase 4:** [04-database-jdbc/00-intro.md](00-lessons/04-database-jdbc/00-intro.md)
+- **Clase 5:** [05-crud-operations/00-intro.md](00-lessons/05-crud-operations/00-intro.md)
 - **Recursos extras:** [01-extras/00-index.md](01-extras/00-index.md)
 - **Progreso:** [PROGRESS.md](PROGRESS.md)
 
@@ -206,7 +217,7 @@ PixelAndBean/
 ### Documentación Pendiente (Futuro)
 - [x] Clase 3 - MVC + DI ✅ Completada
 - [x] Clase 4 - Conexión BD (JDBC) ✅ Completada
-- [ ] Clase 5 - CRUD Completo
+- [x] Clase 5 - CRUD Completo ✅ Completada
 - [ ] Clase 6 - Empaquetado
 
 ### Extras Planificados
@@ -225,8 +236,8 @@ PixelAndBean/
 
 ## 📊 Estadísticas
 
-- **Clases completadas:** 4 de 6 (67%)
-- **Archivos de documentación:** 22
+- **Clases completadas:** 5 de 6 (83%)
+- **Archivos de documentación:** 26
 - **Scripts SQL:** 2 (schema + seed)
 
 ---
@@ -235,6 +246,6 @@ PixelAndBean/
 
 ---
 
-**Última actualización:** 25 de noviembre de 2025  
+**Última actualización:** 27 de noviembre de 2025  
 **Mantenido por:** Carlos Martínez
 
