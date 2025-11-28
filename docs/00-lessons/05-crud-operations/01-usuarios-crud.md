@@ -465,7 +465,7 @@ Agregar los métodos faltantes:
 
 ```java
 @Override
-public void update(Usuario usuario) throws SQLException {
+public void actualizar(Usuario usuario) throws SQLException {
     String sql = "UPDATE usuario SET password = ?, nombre_completo = ?, rol = ?, activo = ? " +
                  "WHERE username = ?";
     
@@ -486,7 +486,7 @@ public void update(Usuario usuario) throws SQLException {
 }
 
 @Override
-public void delete(String username) throws SQLException {
+public void eliminar(String username) throws SQLException {
     String sql = "DELETE FROM usuario WHERE username = ?";
     
     try (Connection conn = connectionFactory.getConnection();
@@ -502,7 +502,7 @@ public void delete(String username) throws SQLException {
 }
 
 @Override
-public boolean existsByUsername(String username) throws SQLException {
+public boolean existePorUsername(String username) throws SQLException {
     String sql = "SELECT COUNT(*) FROM usuario WHERE username = ?";
     
     try (Connection conn = connectionFactory.getConnection();
@@ -545,7 +545,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void crear(Usuario usuario) throws SQLException {
         // Validar username único
-        if (usuarioRepository.existsByUsername(usuario.getUsername())) {
+        if (usuarioRepository.existePorUsername(usuario.getUsername())) {
             throw new IllegalArgumentException("El username ya existe: " + usuario.getUsername());
         }
         
@@ -569,7 +569,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void actualizar(Usuario usuario) throws SQLException {
         // Validar que existe
-        if (!usuarioRepository.existsByUsername(usuario.getUsername())) {
+        if (!usuarioRepository.existePorUsername(usuario.getUsername())) {
             throw new IllegalArgumentException("Usuario no encontrado: " + usuario.getUsername());
         }
         
@@ -584,7 +584,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         
         // Actualizar
-        usuarioRepository.update(usuario);
+        usuarioRepository.actualizar(usuario);
     }
     
     @Override
@@ -594,7 +594,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new IllegalArgumentException("No se puede eliminar el usuario admin");
         }
         
-        usuarioRepository.delete(username);
+        usuarioRepository.eliminar(username);
     }
     
     @Override

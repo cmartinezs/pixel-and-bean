@@ -33,7 +33,7 @@ src/
 
 ### Cargar Iconos en la Aplicación
 
-Crear clase `IconLoader` en el paquete `util`:
+Crear clase `CargadorIconos` en el paquete `util`:
 
 ```java
 package cl.cmartinezs.pnb.util;
@@ -44,9 +44,9 @@ import java.net.URL;
 /**
  * Utilidad para cargar iconos de recursos
  */
-public class IconLoader {
+public class CargadorIconos {
     
-    private static final String ICON_PATH = "/icons/";
+    private static final String RUTA_ICONOS = "/icons/";
     
     /**
      * Carga un icono desde los recursos
@@ -54,9 +54,9 @@ public class IconLoader {
      * @param nombre nombre del archivo (ej: "user.png")
      * @return ImageIcon o null si no se encuentra
      */
-    public static ImageIcon cargarIcono(String nombre) {
+    public static ImageIcon cargar(String nombre) {
         try {
-            URL url = IconLoader.class.getResource(ICON_PATH + nombre);
+            URL url = CargadorIconos.class.getResource(RUTA_ICONOS + nombre);
             if (url != null) {
                 return new ImageIcon(url);
             }
@@ -74,8 +74,8 @@ public class IconLoader {
      * @param alto alto deseado
      * @return ImageIcon escalado o null
      */
-    public static ImageIcon cargarIconoEscalado(String nombre, int ancho, int alto) {
-        ImageIcon icono = cargarIcono(nombre);
+    public static ImageIcon cargarEscalado(String nombre, int ancho, int alto) {
+        ImageIcon icono = cargar(nombre);
         if (icono != null) {
             java.awt.Image img = icono.getImage();
             java.awt.Image imgEscalada = img.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH);
@@ -100,11 +100,11 @@ private void crearMenu() {
     menuArchivo.setMnemonic('A');
     
     JMenuItem itemCerrarSesion = new JMenuItem("Cerrar Sesión");
-    itemCerrarSesion.setIcon(IconLoader.cargarIconoEscalado("exit.png", 16, 16));
+    itemCerrarSesion.setIcon(CargadorIconos.cargarEscalado("exit.png", 16, 16));
     itemCerrarSesion.addActionListener(e -> cerrarSesion());
     
     JMenuItem itemSalir = new JMenuItem("Salir");
-    itemSalir.setIcon(IconLoader.cargarIconoEscalado("exit.png", 16, 16));
+    itemSalir.setIcon(CargadorIconos.cargarEscalado("exit.png", 16, 16));
     itemSalir.addActionListener(e -> salir());
     
     menuArchivo.add(itemCerrarSesion);
@@ -116,11 +116,11 @@ private void crearMenu() {
     menuGestion.setMnemonic('G');
     
     JMenuItem itemUsuarios = new JMenuItem("Usuarios");
-    itemUsuarios.setIcon(IconLoader.cargarIconoEscalado("user.png", 16, 16));
+    itemUsuarios.setIcon(CargadorIconos.cargarEscalado("user.png", 16, 16));
     itemUsuarios.addActionListener(e -> mostrarUsuarios());
     
     JMenuItem itemProductos = new JMenuItem("Productos");
-    itemProductos.setIcon(IconLoader.cargarIconoEscalado("product.png", 16, 16));
+    itemProductos.setIcon(CargadorIconos.cargarEscalado("product.png", 16, 16));
     itemProductos.addActionListener(e -> mostrarProductos());
     
     menuGestion.add(itemUsuarios);
@@ -136,7 +136,7 @@ private void crearMenu() {
 
 // Establecer icono de la aplicación
 private void configurarIconoAplicacion() {
-    ImageIcon icono = IconLoader.cargarIcono("app-icon.png");
+    ImageIcon icono = CargadorIconos.cargar("app-icon.png");
     if (icono != null) {
         setIconImage(icono.getImage());
     }
@@ -316,7 +316,7 @@ public class VentanaPrincipal extends JFrame {
 ```java
 package cl.cmartinezs.pnb.gui;
 
-import cl.cmartinezs.pnb.util.IconLoader;
+import cl.cmartinezs.pnb.util.CargadorIconos;
 
 import javax.swing.*;
 import java.awt.*;
@@ -343,7 +343,7 @@ public class AcercaDeDialog extends JDialog {
         JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelSuperior.setBackground(Color.WHITE);
         
-        ImageIcon icono = IconLoader.cargarIconoEscalado("app-icon.png", 64, 64);
+        ImageIcon icono = CargadorIconos.cargarEscalado("app-icon.png", 64, 64);
         if (icono != null) {
             panelSuperior.add(new JLabel(icono));
         }
@@ -495,14 +495,14 @@ Agregar a `VentaRepository`:
 /**
  * Obtiene los productos más vendidos en un rango de fechas
  */
-List<ProductoVendido> findTopProductos(LocalDate fechaInicio, LocalDate fechaFin, int limite) throws SQLException;
+List<ProductoVendido> buscarTopProductos(LocalDate fechaInicio, LocalDate fechaFin, int limite) throws SQLException;
 ```
 
 Implementar en `VentaRepositoryImpl`:
 
 ```java
 @Override
-public List<ProductoVendido> findTopProductos(LocalDate fechaInicio, LocalDate fechaFin, int limite) throws SQLException {
+public List<ProductoVendido> buscarTopProductos(LocalDate fechaInicio, LocalDate fechaFin, int limite) throws SQLException {
     String sql = "SELECT p.nombre, " +
                  "       SUM(vd.cantidad) as cantidad_vendida, " +
                  "       SUM(vd.subtotal) as total_generado " +
@@ -775,7 +775,7 @@ En cualquier panel con tabla:
 ```java
 private void agregarBotonExportar(JPanel panel, JTable tabla) {
     JButton btnExportar = new JButton("Exportar a CSV");
-    btnExportar.setIcon(IconLoader.cargarIconoEscalado("export.png", 16, 16));
+    btnExportar.setIcon(CargadorIconos.cargarEscalado("export.png", 16, 16));
     btnExportar.addActionListener(e -> ExportadorCSV.mostrarDialogoExportar(tabla, this));
     
     panel.add(btnExportar);

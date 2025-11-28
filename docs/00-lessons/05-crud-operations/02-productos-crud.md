@@ -315,7 +315,7 @@ public class ProductoDialog extends JDialog {
 
 ```java
 @Override
-public void save(Producto producto) throws SQLException {
+public void guardar(Producto producto) throws SQLException {
     String sql = "INSERT INTO producto (nombre, categoria, tipo, precio, activo) " +
                  "VALUES (?, ?, ?, ?, ?)";
     
@@ -340,7 +340,7 @@ public void save(Producto producto) throws SQLException {
 }
 
 @Override
-public void update(Producto producto) throws SQLException {
+public void actualizar(Producto producto) throws SQLException {
     String sql = "UPDATE producto SET nombre = ?, categoria = ?, tipo = ?, " +
                  "precio = ?, activo = ? WHERE id = ?";
     
@@ -362,7 +362,7 @@ public void update(Producto producto) throws SQLException {
 }
 
 @Override
-public void delete(int id) throws SQLException {
+public void eliminar(int id) throws SQLException {
     String sql = "DELETE FROM producto WHERE id = ?";
     
     try (Connection conn = connectionFactory.getConnection();
@@ -378,7 +378,7 @@ public void delete(int id) throws SQLException {
 }
 
 @Override
-public List<Producto> findByCategoria(String categoria) throws SQLException {
+public List<Producto> buscarPorCategoria(String categoria) throws SQLException {
     String sql = "SELECT * FROM producto WHERE categoria = ? ORDER BY nombre";
     
     try (Connection conn = connectionFactory.getConnection();
@@ -397,7 +397,7 @@ public List<Producto> findByCategoria(String categoria) throws SQLException {
 }
 
 @Override
-public List<Producto> findByNombreContaining(String nombre) throws SQLException {
+public List<Producto> buscarPorNombreContiene(String nombre) throws SQLException {
     String sql = "SELECT * FROM producto WHERE nombre LIKE ? ORDER BY nombre";
     
     try (Connection conn = connectionFactory.getConnection();
@@ -416,7 +416,7 @@ public List<Producto> findByNombreContaining(String nombre) throws SQLException 
 }
 
 @Override
-public List<Producto> findActivos() throws SQLException {
+public List<Producto> buscarActivos() throws SQLException {
     String sql = "SELECT * FROM producto WHERE activo = 1 ORDER BY categoria, nombre";
     
     try (Connection conn = connectionFactory.getConnection();
@@ -432,7 +432,7 @@ public List<Producto> findActivos() throws SQLException {
 }
 
 @Override
-public boolean existsByNombre(String nombre) throws SQLException {
+public boolean existePorNombre(String nombre) throws SQLException {
     String sql = "SELECT COUNT(*) FROM producto WHERE nombre = ?";
     
     try (Connection conn = connectionFactory.getConnection();
@@ -478,12 +478,12 @@ public class ProductoServiceImpl implements ProductoService {
         validarProducto(producto);
         
         // Verificar que no exista
-        if (productoRepository.existsByNombre(producto.getNombre())) {
+        if (productoRepository.existePorNombre(producto.getNombre())) {
             throw new IllegalArgumentException("Ya existe un producto con ese nombre");
         }
         
         // Crear
-        productoRepository.save(producto);
+        productoRepository.guardar(producto);
     }
     
     @Override
@@ -492,26 +492,26 @@ public class ProductoServiceImpl implements ProductoService {
         validarProducto(producto);
         
         // Verificar que existe
-        Producto actual = productoRepository.findById(producto.getId());
+        Producto actual = productoRepository.buscarPorId(producto.getId());
         if (actual == null) {
             throw new IllegalArgumentException("Producto no encontrado");
         }
         
         // Verificar nombre único (excepto el mismo)
         if (!actual.getNombre().equals(producto.getNombre())) {
-            if (productoRepository.existsByNombre(producto.getNombre())) {
+            if (productoRepository.existePorNombre(producto.getNombre())) {
                 throw new IllegalArgumentException("Ya existe un producto con ese nombre");
             }
         }
         
         // Actualizar
-        productoRepository.update(producto);
+        productoRepository.actualizar(producto);
     }
     
     @Override
     public void eliminar(int id) throws SQLException {
         // Verificar que existe
-        Producto producto = productoRepository.findById(id);
+        Producto producto = productoRepository.buscarPorId(id);
         if (producto == null) {
             throw new IllegalArgumentException("Producto no encontrado");
         }
@@ -519,17 +519,17 @@ public class ProductoServiceImpl implements ProductoService {
         // TODO: Verificar que no tenga ventas asociadas
         // (implementar en trabajo autónomo)
         
-        productoRepository.delete(id);
+        productoRepository.eliminar(id);
     }
     
     @Override
     public List<Producto> listarTodos() throws SQLException {
-        return productoRepository.findAll();
+        return productoRepository.buscarTodos();
     }
     
     @Override
     public List<Producto> listarActivos() throws SQLException {
-        return productoRepository.findActivos();
+        return productoRepository.buscarActivos();
     }
     
     @Override
@@ -537,17 +537,17 @@ public class ProductoServiceImpl implements ProductoService {
         if (nombre == null || nombre.trim().isEmpty()) {
             return listarTodos();
         }
-        return productoRepository.findByNombreContaining(nombre);
+        return productoRepository.buscarPorNombreContiene(nombre);
     }
     
     @Override
     public List<Producto> buscarPorCategoria(String categoria) throws SQLException {
-        return productoRepository.findByCategoria(categoria);
+        return productoRepository.buscarPorCategoria(categoria);
     }
     
     @Override
     public Producto buscarPorId(int id) throws SQLException {
-        return productoRepository.findById(id);
+        return productoRepository.buscarPorId(id);
     }
     
     /**

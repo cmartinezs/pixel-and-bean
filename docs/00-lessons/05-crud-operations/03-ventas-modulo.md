@@ -254,27 +254,27 @@ public interface VentaRepository {
     /**
      * Guarda una venta con sus detalles en una transacción
      */
-    void save(Venta venta) throws SQLException;
+    void guardar(Venta venta) throws SQLException;
     
     /**
      * Busca una venta por ID con sus detalles
      */
-    Venta findById(int id) throws SQLException;
+    Venta buscarPorId(int id) throws SQLException;
     
     /**
      * Lista todas las ventas (sin detalles)
      */
-    List<Venta> findAll() throws SQLException;
+    List<Venta> buscarTodas() throws SQLException;
     
     /**
      * Lista ventas de una fecha específica
      */
-    List<Venta> findByFecha(LocalDate fecha) throws SQLException;
+    List<Venta> buscarPorFecha(LocalDate fecha) throws SQLException;
     
     /**
      * Lista ventas del día actual
      */
-    List<Venta> findDelDia() throws SQLException;
+    List<Venta> buscarDelDia() throws SQLException;
     
     /**
      * Anula una venta (cambia estado)
@@ -307,7 +307,7 @@ public class VentaRepositoryImpl implements VentaRepository {
     }
     
     @Override
-    public void save(Venta venta) throws SQLException {
+    public void guardar(Venta venta) throws SQLException {
         Connection conn = null;
         
         try {
@@ -389,7 +389,7 @@ public class VentaRepositoryImpl implements VentaRepository {
     }
     
     @Override
-    public Venta findById(int id) throws SQLException {
+    public Venta buscarPorId(int id) throws SQLException {
         String sql = "SELECT * FROM venta WHERE id = ?";
         
         try (Connection conn = connectionFactory.getConnection();
@@ -412,7 +412,7 @@ public class VentaRepositoryImpl implements VentaRepository {
     }
     
     @Override
-    public List<Venta> findAll() throws SQLException {
+    public List<Venta> buscarTodas() throws SQLException {
         String sql = "SELECT * FROM venta ORDER BY fecha_hora DESC";
         
         try (Connection conn = connectionFactory.getConnection();
@@ -428,7 +428,7 @@ public class VentaRepositoryImpl implements VentaRepository {
     }
     
     @Override
-    public List<Venta> findByFecha(LocalDate fecha) throws SQLException {
+    public List<Venta> buscarPorFecha(LocalDate fecha) throws SQLException {
         String sql = "SELECT * FROM venta WHERE DATE(fecha_hora) = ? ORDER BY fecha_hora DESC";
         
         try (Connection conn = connectionFactory.getConnection();
@@ -448,7 +448,7 @@ public class VentaRepositoryImpl implements VentaRepository {
     
     @Override
     public List<Venta> findDelDia() throws SQLException {
-        return findByFecha(LocalDate.now());
+        return buscarPorFecha(LocalDate.now());
     }
     
     @Override
@@ -596,12 +596,12 @@ public class VentaServiceImpl implements VentaService {
         venta.recalcularTotal();
         
         // Guardar
-        ventaRepository.save(venta);
+        ventaRepository.guardar(venta);
     }
     
     @Override
     public List<Venta> listarPorFecha(LocalDate fecha) throws SQLException {
-        return ventaRepository.findByFecha(fecha);
+        return ventaRepository.buscarPorFecha(fecha);
     }
     
     @Override
@@ -612,7 +612,7 @@ public class VentaServiceImpl implements VentaService {
     @Override
     public void anular(int id) throws SQLException {
         // Verificar que existe
-        Venta venta = ventaRepository.findById(id);
+        Venta venta = ventaRepository.buscarPorId(id);
         if (venta == null) {
             throw new IllegalArgumentException("Venta no encontrada");
         }
@@ -628,7 +628,7 @@ public class VentaServiceImpl implements VentaService {
     
     @Override
     public Venta buscarPorId(int id) throws SQLException {
-        return ventaRepository.findById(id);
+        return ventaRepository.buscarPorId(id);
     }
 }
 ```
