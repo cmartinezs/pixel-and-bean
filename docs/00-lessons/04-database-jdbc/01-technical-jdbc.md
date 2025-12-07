@@ -687,7 +687,7 @@ try (PreparedStatement ps = conn.prepareStatement(sql);
         Usuario usuario = new Usuario();
         usuario.setId(rs.getInt("id"));
         usuario.setUsername(rs.getString("username"));
-        usuario.setRol(rs.getString("rol"));
+        usuario.setRol(Rol.valueOf(rs.getString("rol")));  // Convertir String a Enum
         usuario.setActivo(rs.getBoolean("activo"));
         
         usuarios.add(usuario);

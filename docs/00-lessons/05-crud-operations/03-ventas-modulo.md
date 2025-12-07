@@ -36,9 +36,10 @@ public class Venta {
     
     private Integer id;
     private LocalDateTime fechaHora;
-    private String usuarioId;  // username del usuario que registró la venta
+    private Integer usuarioId;  // ID del usuario que registró la venta (FK a usuario.id)
     private BigDecimal total;
     private String estado;  // ACTIVA, ANULADA
+    private String observaciones;  // Observaciones de la venta
     
     // Relación con detalles
     private List<VentaDetalle> detalles;
@@ -69,11 +70,11 @@ public class Venta {
         this.fechaHora = fechaHora;
     }
     
-    public String getUsuarioId() {
+    public Integer getUsuarioId() {
         return usuarioId;
     }
     
-    public void setUsuarioId(String usuarioId) {
+    public void setUsuarioId(Integer usuarioId) {
         this.usuarioId = usuarioId;
     }
     
@@ -91,6 +92,14 @@ public class Venta {
     
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+    
+    public String getObservaciones() {
+        return observaciones;
+    }
+    
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
     
     public List<VentaDetalle> getDetalles() {

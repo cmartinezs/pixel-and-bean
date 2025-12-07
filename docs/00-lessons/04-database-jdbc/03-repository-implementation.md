@@ -220,7 +220,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
         usuario.setUsername(rs.getString("username"));
         usuario.setPassword(rs.getString("password"));
         usuario.setNombreCompleto(rs.getString("nombre_completo"));
-        usuario.setRol(rs.getString("rol"));
+        usuario.setRol(Rol.valueOf(rs.getString("rol")));  // Convertir String a Enum
         usuario.setActivo(rs.getBoolean("activo"));
         return usuario;
     }
@@ -337,7 +337,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
             ps.setString(1, usuario.getUsername());
             ps.setString(2, usuario.getPassword()); // TODO: Hashear
             ps.setString(3, usuario.getNombreCompleto());
-            ps.setString(4, usuario.getRol());
+            ps.setString(4, usuario.getRol().name());  // Convertir Enum a String
             ps.setBoolean(5, usuario.isActivo());
             
             int rowsAffected = ps.executeUpdate();
@@ -368,7 +368,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
             ps.setString(1, usuario.getUsername());
             ps.setString(2, usuario.getPassword()); // TODO: Hashear si cambió
             ps.setString(3, usuario.getNombreCompleto());
-            ps.setString(4, usuario.getRol());
+            ps.setString(4, usuario.getRol().name());  // Convertir Enum a String
             ps.setBoolean(5, usuario.isActivo());
             ps.setInt(6, usuario.getId());
             
@@ -592,7 +592,7 @@ public class ProductoRepositoryImpl implements ProductoRepository {
         producto.setCategoria(rs.getString("categoria"));
         producto.setTipo(rs.getString("tipo"));
         producto.setDescripcion(rs.getString("descripcion"));
-        producto.setPrecio(rs.getDouble("precio"));
+        producto.setPrecio(rs.getBigDecimal("precio"));  // BigDecimal para precisión monetaria
         producto.setActivo(rs.getBoolean("activo"));
         return producto;
     }
@@ -713,7 +713,7 @@ public class ProductoRepositoryImpl implements ProductoRepository {
             ps.setString(2, producto.getCategoria());
             ps.setString(3, producto.getTipo());
             ps.setString(4, producto.getDescripcion());
-            ps.setDouble(5, producto.getPrecio());
+            ps.setBigDecimal(5, producto.getPrecio());  // BigDecimal para precisión monetaria
             ps.setBoolean(6, producto.isActivo());
             
             int rowsAffected = ps.executeUpdate();
@@ -744,7 +744,7 @@ public class ProductoRepositoryImpl implements ProductoRepository {
             ps.setString(2, producto.getCategoria());
             ps.setString(3, producto.getTipo());
             ps.setString(4, producto.getDescripcion());
-            ps.setDouble(5, producto.getPrecio());
+            ps.setBigDecimal(5, producto.getPrecio());  // BigDecimal para precisión monetaria
             ps.setBoolean(6, producto.isActivo());
             ps.setInt(7, producto.getId());
             
